@@ -10,11 +10,15 @@ const allPosts = Object.values(
 <BaseLayout pageTitle={pageTitle}>
     <h2>Here you can find my previous projects and favourite illustrations</h2>
 
-    <ul>
+    <ul class="projects-grid">
         {
             allPosts.map((post: any) => (
-                <Workpost url={post.url} title={post.frontmatter.title} />
+                <Workpost
+                    url={post.url}
+                    title={post.frontmatter.title}
+                />
             ))
         }
     </ul>
 </BaseLayout>
+

@@ -1,14 +1,19 @@
 html {
     background-color: #f9f6f1;
     font-family: sans-serif;
+    transition: background-color 0.35s ease, color 0.35s ease;
 }
+
 
 body {
     margin: 0 auto;
-    width: 100%;
-    max-width: 80ch;
-    padding: 1rem;
-    line-height: 1.5;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
+  line-height: 1.5;
+  background-color: inherit;
+  color: inherit;
+  transition: inherit;
 }
 
 * {
@@ -42,7 +47,85 @@ html.dark {
 .dark a {
     color: rgb(166, 1, 59);
 }
-
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 999;
+  }
+  
+  /* Hide checkbox */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  .switch {
+    display: block;
+    width: 50px;
+    height: 26px;
+    background: #d0d0d0;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .switch::after {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Checked state (dark mode) */
+  #toggle-switch:checked + .switch {
+    background: #555;
+  }
+  
+  #toggle-switch:checked + .switch::after {
+    transform: translateX(24px);
+  }
+  
+  /* Focus style for accessibility */
+  #toggle-switch:focus-visible + .switch {
+    outline: 2px solid rgb(166, 1, 59);
+    outline-offset: 2px;
+  }
+  
+  /* Optional: Add sun/moon icons inside switch */
+  .switch::before {
+    content: "🌙";
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  #toggle-switch:checked + .switch::before {
+    content: "☀️";
+    left: 28px;
+    opacity: 0.8;
+  }
+  
 /* nav styles */
 
 .menu {
@@ -81,6 +164,36 @@ html.dark {
     display: unset;
 }
 
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    margin-top: 2rem;
+  }
+  
+  .project-card {
+    list-style: none;
+  }
+  
+  .project-link {
+    display: block;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.9rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  
+  .project-link:hover {
+    transform: translateY(-3px);
+    opacity: 0.88;
+  }
+  
 @media screen and (min-width: 636px) {
     .nav-links {
         margin-left: 5em;
