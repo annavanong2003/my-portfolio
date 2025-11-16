@@ -14,8 +14,8 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body class="min-h-screen">
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" role="group" aria-label="Theme switch">
+
+	<div class="theme-toggle" role="group" aria-label="Theme switch">
       <input
         type="checkbox"
         id="toggle-switch"
@@ -30,59 +30,46 @@ const { pageTitle } = Astro.props;
     <slot />
     <Footer />
 
-    <!-- Load theme script inline (recommended for Astro) -->
     <script>
-      // === THEME TOGGLE SCRIPT (runs immediately) ===
-      (function () {
-        const checkbox = document.getElementById("toggle-switch");
-        const html = document.documentElement;
-
-        // Get saved theme or system preference
-        const stored = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        const isDark = stored === "dark" || (!stored && prefersDark);
-
-        // Apply theme *before* DOM paints (prevents flash)
-        if (isDark) {
-          html.classList.add("dark");
-        } else {
-          html.classList.remove("dark");
-        }
-
-        // Run after DOM is ready
-        document.addEventListener("DOMContentLoaded", () => {
-          if (checkbox) {
-            checkbox.checked = isDark;
-
-            checkbox.addEventListener("change", () => {
-              if (checkbox.checked) {
-                html.classList.add("dark");
-                localStorage.setItem("theme", "dark");
-              } else {
-                html.classList.remove("dark");
-                localStorage.setItem("theme", "light");
-              }
-            });
-          }
-        });
-
-        // Listen to system theme changes
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", (e) => {
-            if (!localStorage.getItem("theme")) {
-              if (e.matches) {
-                html.classList.add("dark");
-                if (checkbox) checkbox.checked = true;
-              } else {
-                html.classList.remove("dark");
-                if (checkbox) checkbox.checked = false;
-              }
-            }
-          });
-      })();
-    </script>
+		(function () {
+		  const checkbox = document.getElementById("toggle-switch") as HTMLInputElement | null;
+		  const html = document.documentElement;
+	  
+		  const stored = localStorage.getItem("theme");
+		  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+		  const isDark = stored === "dark" || (!stored && prefersDark);
+	  
+		  if (isDark) html.classList.add("dark");
+		  else html.classList.remove("dark");
+	  
+		  document.addEventListener("DOMContentLoaded", () => {
+			if (!checkbox) return;
+	  
+			checkbox.checked = isDark;
+	  
+			checkbox.addEventListener("change", () => {
+			  if (checkbox.checked) {
+				html.classList.add("dark");
+				localStorage.setItem("theme", "dark");
+			  } else {
+				html.classList.remove("dark");
+				localStorage.setItem("theme", "light");
+			  }
+			});
+		  });
+	  
+		  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+			if (!localStorage.getItem("theme")) {
+			  if (e.matches) {
+				html.classList.add("dark");
+				if (checkbox) checkbox.checked = true;
+			  } else {
+				html.classList.remove("dark");
+				if (checkbox) checkbox.checked = false;
+			  }
+			}
+		  });
+		})();
+	  </script>
   </body>
 </html>
