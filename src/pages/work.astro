@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Projects";
+import Workpost from "../components/Workpost.astro";
+const allPosts = Object.values(
+    import.meta.glob("./posts/*.md", { eager: true }),
+);
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <h2>Here you can find my previous works and projects</h2>
+
+    <ul>
+        {
+            allPosts.map((post: any) => (
+                <Workpost url={post.url} title={post.frontmatter.title} />
+            ))
+        }
+    </ul>
+</BaseLayout>
