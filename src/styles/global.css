@@ -1,6 +1,30 @@
+@font-face {
+    font-family: "Aesthetic";
+    src: url("/src/assets/fonts/Aesthetic-Regular.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap; 
+  }
+
+  @font-face {
+    font-family: "ElmsSans";
+    src: url("/src/assets/fonts/ElmsSans-VariableFont_wght.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap; 
+  }
+
+  @font-face {
+    font-family: "DarkerGrotesque";
+    src: url("/src/assets/fonts/DarkerGrotesque-VariableFont_wght.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap; 
+  }
+
 html {
     background-color: #f9f6f1;
-    font-family: sans-serif;
+    font-family: "DarkerGrotesque";
     transition: background-color 0.35s ease, color 0.35s ease;
 }
 
@@ -22,7 +46,9 @@ margin: 0 auto;
 
 h1 {
     margin: 1rem 0;
-    font-size: 2.5rem;
+    font-size: 10rem;
+    font-family: "Aesthetic";
+    text-transform: uppercase;
 }
 
 html.dark {
@@ -115,28 +141,26 @@ html.dark {
     content: "🌙";
     position: absolute;
     top: 50%;
-    left: 6px;
+    left: 1.75rem;
     transform: translateY(-50%);
-    font-size: 14px;
-    opacity: 0.7;
+    font-size: 1rem;
     transition: opacity 0.3s ease;
     pointer-events: none;
   }
   
   #toggle-switch:checked + .switch::before {
     content: "☀️";
-    left: 28px;
-    opacity: 0.8;
+    left: 0.25rem;
   }
 
 /* nav styles */
 
 .menu {
+    font-family: "Aesthetic";
+    font-size: 2rem;
     background-color: rgb(166, 1, 59);
     border: none;
     color: #f9f6f1;
-    font-size: 1.2rem;
-    font-weight: bold;
     padding: 5px 10px;
 }
 
@@ -151,8 +175,8 @@ html.dark {
     text-align: center;
     padding: 10px 0;
     text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-family: "Aesthetic";
+    font-size: 2rem;
     text-transform: uppercase;
     color: rgb(166, 1, 59);
 }
@@ -183,6 +207,9 @@ html.dark {
   }
   
   .project-link {
+    font-family: "Aesthetic";
+    font-size: 2rem;
+    text-transform: uppercase;
     display: block;
     background-color: rgb(166, 1, 59);
     color: white;
