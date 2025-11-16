@@ -218,7 +218,7 @@ html.dark {
     margin-top: 1.5rem;
   }
   
-  @media screen and (min-width: 636px) {
+  @media screen and (min-width: 500px) {
     .nav-links {
         margin-left: 5em;
         display: block;
