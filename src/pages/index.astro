@@ -1,9 +1,9 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-const pageTitle = "Home Page";
+import Layout from '../layouts/BaseLayout.astro';
+const pageTitle = "Portfolio";
 ---
 <Layout pageTitle={pageTitle}>
-  <h2>My portfolio</h2>
-  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+  <h2>Hello! I’m Anna. </br>
+    This portfolio gathers my latest projects </br> alongside my favourite illustrations. </br>
+    Take a look around and enjoy the mix.</h2>
 </Layout>
