@@ -142,6 +142,7 @@ margin: 0 auto;
     width: 100%;
     display: none;
     margin: 0;
+    border-radius: 2rem;
 }
 
 .nav-links a {
@@ -153,6 +154,7 @@ margin: 0 auto;
     font-size: var(--m-font-size);
     text-transform: uppercase;
     color: rgb(166, 1, 59);
+    border-radius: 2rem;
 }
 
 .nav-links a:hover,
@@ -234,14 +236,17 @@ html.dark {
 .dark .nav-links a:focus {
     color: rgb(166, 1, 59);
     background-color: #f9f6f1;
+    border-radius: 2rem;
 }
 
 .dark .nav-links a {
     color: #f9f6f1;
+    border-radius: 2rem;
 }
 
 .dark a {
     color: rgb(166, 1, 59);
+    border-radius: 2rem;
 }
 
 html.dark .project-link {
