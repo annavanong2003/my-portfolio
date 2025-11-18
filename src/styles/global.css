@@ -208,13 +208,13 @@ margin: 0 auto;
   /* Header Styles */
   h1 {
     margin: 1rem 0;
-    font-size: var(--xxl-font-size);
+    font-size: clamp(5rem, 10vw, 10rem);
     font-family: "Aesthetic";
     text-transform: uppercase;
 }
 
 h2 {
-    font-size: var(--l-font-size);
+    font-size: clamp(5rem, 8vw, 5rem);
     font-family: "Aesthetic";
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -222,7 +222,7 @@ h2 {
 
 p {
     margin-bottom: 1rem;
-    font-size: var(--s-font-size);
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
 }
 
 
