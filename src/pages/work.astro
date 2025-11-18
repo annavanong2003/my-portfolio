@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "Projects";
+const pageTitle = "My work";
 import Workpost from "../components/Workpost.astro";
 const allPosts = Object.values(
     import.meta.glob("./posts/*.md", { eager: true }),
@@ -8,7 +8,7 @@ const allPosts = Object.values(
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    <h2>Here you can find my previous projects and favourite illustrations</h2>
+    <p>Here you can find my previous projects and favourite illustrations</p>
 
     <ul class="projects-grid">
         {
