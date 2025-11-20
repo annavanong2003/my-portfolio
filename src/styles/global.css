@@ -1,8 +1,10 @@
 :root {
-    --xl-font-size: 8rem;
-    --l-font-size: 4rem;
+    --xxl-font-size: 8rem;
+    --xl-font-size: 5rem;
+    --l-font-size: 3rem;
     --m-font-size: 2rem;
-    --s-font-size: 1rem;
+    --s-font-size: 1.5rem;
+    --xs-font-size: 1rem;
 }
 
 /* Font Faces */
@@ -116,7 +118,7 @@ margin: 0 auto;
     top: 50%;
     left: 1.75rem;
     transform: translateY(-50%);
-    font-size: var(--s-font-size);
+    font-size: var(--xs-font-size);
     transition: opacity 0.3s ease;
     pointer-events: none;
   }
@@ -134,7 +136,7 @@ margin: 0 auto;
     background-color: rgb(166, 1, 59);
     border: none;
     color: #f9f6f1;
-    padding: 0.3rem 0.6rem;
+    padding: 0.9rem 1.2rem;
     border-radius: 2rem;
 }
 
@@ -142,17 +144,19 @@ margin: 0 auto;
     width: 100%;
     display: none;
     margin: 0;
+    border-radius: 2rem;
 }
 
 .nav-links a {
     display: block;
     text-align: center;
-    padding: 0.6rem 0;
+    padding: 0.9rem 1.2rem;
     text-decoration: none;
     font-family: "Aesthetic";
     font-size: var(--m-font-size);
     text-transform: uppercase;
     color: rgb(166, 1, 59);
+    border-radius: 2rem;
 }
 
 .nav-links a:hover,
@@ -204,10 +208,23 @@ margin: 0 auto;
   /* Header Styles */
   h1 {
     margin: 1rem 0;
-    font-size: var(--xl-font-size);
+    font-size: clamp(5rem, 10vw, 10rem);
     font-family: "Aesthetic";
     text-transform: uppercase;
 }
+
+h2 {
+    font-size: clamp(5rem, 8vw, 5rem);
+    font-family: "Aesthetic";
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+}
+
 
 /* Footer Styles */
   .footer-links {
@@ -234,14 +251,17 @@ html.dark {
 .dark .nav-links a:focus {
     color: rgb(166, 1, 59);
     background-color: #f9f6f1;
+    border-radius: 2rem;
 }
 
 .dark .nav-links a {
     color: #f9f6f1;
+    border-radius: 2rem;
 }
 
 .dark a {
     color: rgb(166, 1, 59);
+    border-radius: 2rem;
 }
 
 html.dark .project-link {
@@ -267,8 +287,8 @@ html.dark .project-link {
 
     .nav-links a {
         display: inline-block;
-        padding: 1rem 1.25rem;
-    }
+        padding: 0.9rem 1.2rem;
+      }
 
     .menu {
         display: none;

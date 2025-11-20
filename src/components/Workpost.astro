@@ -1,10 +1,17 @@
 ---
 const { title, url } = Astro.props;
+
+import Workpostcards from "./Workpostcards.astro";
 ---
 
 <li class="project-card">
-    <a href={url} class="project-link">
-        {title}
-    </a>
+  <a href={url} class="project-link">
+    {title}
+  </a>
 </li>
 
+<ul class="projects-grid">
+  <li>
+    <Workpostcards />
+  </li>
+</ul>

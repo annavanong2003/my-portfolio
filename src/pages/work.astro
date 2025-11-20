@@ -1,24 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "Projects";
+const pageTitle = "My work";
 import Workpost from "../components/Workpost.astro";
 const allPosts = Object.values(
-    import.meta.glob("./posts/*.md", { eager: true }),
+  import.meta.glob("./posts/*.md", { eager: true })
 );
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    <h2>Here you can find my previous projects and favourite illustrations</h2>
-
-    <ul class="projects-grid">
-        {
-            allPosts.map((post: any) => (
-                <Workpost
-                    url={post.url}
-                    title={post.frontmatter.title}
-                />
-            ))
-        }
-    </ul>
+  <p>Here you can find my previous projects and favourite illustrations</p>
+  <Workpost />
 </BaseLayout>
-
