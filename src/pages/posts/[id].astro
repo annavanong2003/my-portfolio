@@ -18,26 +18,22 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout>
-  <div>
-    <span>{post.data.title}</span>
-    <span>{post.data.description}</span>
-  </div>
+<BaseLayout pageTitle="">
+  <h1 class="post-title">{post.data.title}</h1>
+  <p class="description">{post.data.description}</p>
+  <Content />
 </BaseLayout>
 
 <style>
-  main {
-    background: #f9f5f0;
-    min-height: 100vh;
-    font-family: Helvetica, Arial, sans-serif;
-    color: #111;
+  .post-title {
+    font-family: "Aesthetic" !important;
+    font-size: clamp(5rem, 10vw, 10rem) !important;
+    margin: 1rem 0 !important;
+    text-transform: uppercase !important;
   }
-  div {
-    max-width: 90rem;
-    margin: 0 auto;
-    padding: 2rem 5rem;
-  }
-  div p:nth-child(2) {
-    max-width: 2rem;
+
+  .description {
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    margin-bottom: 2rem;
   }
 </style>
