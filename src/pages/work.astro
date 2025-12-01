@@ -2,9 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "My work";
 import Workpost from "../components/Workpost.astro";
-const allPosts = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true })
-);
 ---
 
 <BaseLayout pageTitle={pageTitle}>
