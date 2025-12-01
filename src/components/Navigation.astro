@@ -13,6 +13,8 @@
     display: none;
     margin: 0;
     border-radius: 2rem;
+    flex-direction: column;
+    margin-top: 1rem;
   }
 
   .nav-links a {
@@ -25,6 +27,7 @@
     text-transform: uppercase;
     color: rgb(166, 1, 59);
     border-radius: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   .nav-links a:hover,
@@ -34,8 +37,8 @@
     border-radius: 2rem;
   }
 
-  :has(.menu[aria-expanded="true"]) .nav-links {
-    display: unset;
+  :global(:has(.menu[aria-expanded="true"])) .nav-links {
+    display: flex;
   }
 
   html.dark .nav-links a:hover,
@@ -50,18 +53,21 @@
     border-radius: 2rem;
   }
 
-  @media screen and (min-width: 496px) {
+  @media screen and (min-width: 31rem) {
     .nav-links {
       margin-left: 5em;
-      display: block;
+      display: flex;
+      flex-direction: row;
       position: static;
       width: auto;
       background: none;
+      margin-top: 0;
     }
 
     .nav-links a {
       display: inline-block;
       padding: 0.9rem 1.2rem;
+      margin-bottom: 0;
     }
   }
 </style>
