@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const pageTitle = "Illustrations";
+const illustrations = await getCollection("illustrations");
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p>Here you can find my favourite illustrations that I made</p>
+  <ul class="illustrations-grid">
+    {
+      illustrations.map((illustration) => (
+        <li class="illustration-card">
+          <a
+            href={`${import.meta.env.BASE_URL}illustrations/${illustration.id}`}
+            class="illustration-link"
+          >
+            {illustration.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="navigation-button">
+    <a href={`${import.meta.env.BASE_URL}recipes`} class="next-link"
+      >Let's go take a look at these recipes →</a
+    >
+  </div>
+</BaseLayout>
+
+<style>
+  .illustrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  .illustration-card {
+    list-style: none;
+  }
+
+  .illustration-link {
+    font-family: "Aesthetic";
+    font-size: 2rem;
+    text-transform: uppercase;
+    display: block;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.9rem 1.2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .illustration-link:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  html.dark .illustration-link {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .illustration-link:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+
+  .navigation-button {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .next-link {
+    display: inline-block;
+    font-family: "Aesthetic";
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.6rem 0.9rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .next-link:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  html.dark .next-link {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .next-link:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+</style>
