@@ -7,7 +7,6 @@ const projectsCollection = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      image: z.string().optional(),
     }),
 });
 
@@ -17,7 +16,6 @@ const illustrationsCollection = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      image: z.string().optional(),
     }),
 });
 
@@ -27,7 +25,6 @@ const recipesCollection = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
-      image: z.string().optional(),
     }),
 });
 

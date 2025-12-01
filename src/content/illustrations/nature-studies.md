@@ -1,7 +1,6 @@
 ---
 title: Nature Studies
 description: "Botanical and landscape illustrations capturing natural beauty"
-image: "/images/nature-studies.jpg"
 ---
 
 ## Nature Collection

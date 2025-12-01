@@ -1,7 +1,6 @@
 ---
 title: Pasta Carbonara
 description: "Authentic Italian pasta carbonara with creamy egg sauce and crispy pancetta"
-image: "/images/pasta-carbonara.jpg"
 ---
 
 ## Ingredients

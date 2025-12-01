@@ -1,7 +1,6 @@
 ---
 title: Avocado Toast
 description: "Simple and delicious avocado toast with fresh toppings"
-image: "/images/avocado-toast.jpg"
 ---
 
 ## Ingredients

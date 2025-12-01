@@ -1,7 +1,6 @@
 ---
 title: Chocolate Chip Cookies
 description: "Classic homemade chocolate chip cookies with a crispy edge and chewy center"
-image: "/images/chocolate-chip-cookies.jpg"
 ---
 
 ## Ingredients

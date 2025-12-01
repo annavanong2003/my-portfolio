@@ -1,7 +1,6 @@
 ---
 title: Abstract Patterns
 description: "A series of geometric illustrations exploring color and form"
-image: "/images/abstract-patterns.jpg"
 ---
 
 ## Illustration Series

@@ -1,16 +1,27 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
 
+export const getStaticPaths = (async ({ paginate }) => {
+  const projects = await getCollection("projects");
+  return paginate(projects, { pageSize: 25 });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<CollectionEntry<"projects">>;
+}
+
+const { page } = Astro.props;
 const pageTitle = "Projects";
-const projects = await getCollection("projects");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <p>Here you can find my previous projects I worked on</p>
   <ul class="projects-grid">
     {
-      projects.map((project) => (
+      page.data.map((project) => (
         <li class="project-card">
           <a
             href={`${import.meta.env.BASE_URL}projects/${project.id}`}
@@ -22,6 +33,20 @@ const projects = await getCollection("projects");
       ))
     }
   </ul>
+  
+  {page.lastPage > 1 && (
+    <nav class="pagination">
+      {page.url.prev && (
+        <a href={page.url.prev} class="pagination-link">← Previous</a>
+      )}
+      <span class="pagination-info">
+        Page {page.currentPage} of {page.lastPage}
+      </span>
+      {page.url.next && (
+        <a href={page.url.next} class="pagination-link">Next →</a>
+      )}
+    </nav>
+  )}
 </BaseLayout>
 
 <style>
@@ -71,19 +96,22 @@ const projects = await getCollection("projects");
     opacity: 0.8;
   }
 
-  .navigation-button {
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
     margin-top: 3rem;
-    text-align: center;
   }
 
-  .next-link {
+  .pagination-link {
     display: inline-block;
     font-family: "Aesthetic";
-    font-size: 2rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
     background-color: rgb(166, 1, 59);
     color: white;
-    padding: 0.9rem 1.2rem;
+    padding: 0.6rem 0.9rem;
     border-radius: 2rem;
     text-decoration: none;
     text-align: center;
@@ -93,17 +121,22 @@ const projects = await getCollection("projects");
       opacity 0.15s ease;
   }
 
-  .next-link:hover {
+  .pagination-link:hover {
     transform: translateY(-0.2rem);
     opacity: 0.8;
   }
 
-  html.dark .next-link {
+  .pagination-info {
+    font-family: "DarkerGrotesque";
+    font-size: 1.2rem;
+  }
+
+  html.dark .pagination-link {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
   }
 
-  html.dark .next-link:hover {
+  html.dark .pagination-link:hover {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
     opacity: 0.8;
