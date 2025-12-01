@@ -1,8 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import catImage from "../assets/images/cat.jpg";
+import { Image } from "astro:assets";
 const pageTitle = "About";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Learn more about me and my creative journey.</p>
+  <div class="about-content">
+    <Image src={catImage} alt="About me" class="about-image" />
+    <p>Learn more about me and my creative journey.</p>
+  </div>
 </BaseLayout>
+
+<style>
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .about-image {
+    width: 100%;
+    max-width: 40rem;
+    height: auto;
+    border-radius: 1rem;
+    margin: 2rem 0;
+  }
+
+  p {
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    text-align: center;
+  }
+</style>

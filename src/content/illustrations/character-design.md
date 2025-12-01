@@ -1,6 +1,7 @@
 ---
 title: Character Design
 description: "Original character illustrations for storytelling and branding"
+image: "/images/character-design.jpg"
 ---
 
 ## Character Collection

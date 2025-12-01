@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import catImage from "../../assets/images/cat.jpg";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const recipes = await getCollection("recipes");
@@ -22,6 +24,7 @@ const { Content } = await render(recipe);
   <a href={`${import.meta.env.BASE_URL}recipes`} class="back-button"
     >← Back to Recipes</a
   >
+  <Image src={catImage} alt={recipe.data.title} class="recipe-image" />
   <h1 class="post-title">{recipe.data.title}</h1>
   <p class="description">{recipe.data.description}</p>
   <Content />
@@ -72,5 +75,14 @@ const { Content } = await render(recipe);
   .description {
     font-size: clamp(1.5rem, 2.5vw, 1.5rem);
     margin-bottom: 2rem;
+  }
+
+  .recipe-image {
+    width: 100%;
+    max-width: 50rem;
+    height: auto;
+    border-radius: 1rem;
+    margin: 2rem 0;
+    display: block;
   }
 </style>
