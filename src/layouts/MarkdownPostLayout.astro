@@ -4,8 +4,8 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <p class="description"><em>{frontmatter.description}</em></p>
-    <slot />
+  <p class="description"><em>{frontmatter.description}</em></p>
+  <slot />
 </BaseLayout>
 
 <style>
@@ -14,4 +14,3 @@ const { frontmatter } = Astro.props;
     margin-bottom: 2rem;
   }
 </style>
-
