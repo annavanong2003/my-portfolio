@@ -1,5 +1,5 @@
 ---
-title: Chocolate Chip Cookies (Advanced)
+title: Chocolate Chip Cookies
 description: "Recreating the famous Levain bakery Chocolate Chip cookies"
 ---
 
@@ -30,4 +30,3 @@ description: "Recreating the famous Levain bakery Chocolate Chip cookies"
 9. Portion the dough into 85 g balls and keep them refrigerated until you're ready to bake.
 10. Bake at 180°C for 15–17 minutes, or until the edges are golden brown.
 
-Learn more about [Levain Bakery](https://levainbakery.com/?srsltid=AfmBOoqG6nPKNDAUUxwsJkBVP_Wp2xpictwGdE0xBjc5-y-Wxb9Ft8ib)
