@@ -24,14 +24,16 @@ const { Content } = await render(illustration);
   <a href={`${import.meta.env.BASE_URL}illustrations`} class="back-button"
     >← Back to Illustrations</a
   >
-  <Image
-    src={catImage}
-    alt={illustration.data.title}
-    class="illustration-image"
-  />
   <h1 class="post-title">{illustration.data.title}</h1>
   <p class="description">{illustration.data.description}</p>
   <Content />
+  
+  <div class="gallery">
+    <Image src={catImage} alt="Gallery image 1" class="gallery-image" />
+    <Image src={catImage} alt="Gallery image 2" class="gallery-image" />
+    <Image src={catImage} alt="Gallery image 3" class="gallery-image" />
+    <Image src={catImage} alt="Gallery image 4" class="gallery-image" />
+  </div>
 </BaseLayout>
 
 <style>
@@ -71,9 +73,10 @@ const { Content } = await render(illustration);
 
   .post-title {
     font-family: "Aesthetic" !important;
-    font-size: clamp(5rem, 10vw, 10rem) !important;
+    font-size: clamp(4rem, 8vw, 8rem) !important;
     margin: 1rem 0 !important;
     text-transform: uppercase !important;
+    line-height: 0.9 !important;
   }
 
   .description {
@@ -88,5 +91,30 @@ const { Content } = await render(illustration);
     border-radius: 1rem;
     margin: 2rem 0;
     display: block;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.125rem solid rgb(166, 1, 59);
+  }
+
+  @media (max-width: 40.625rem) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+  }
+
+  html.dark .gallery {
+    border-top-color: #f9f6f1;
   }
 </style>

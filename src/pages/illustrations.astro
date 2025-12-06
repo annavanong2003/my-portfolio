@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import catImage from "../assets/images/cat.jpg";
+import { Image } from "astro:assets";
 
 const pageTitle = "Illustrations";
 const illustrations = await getCollection("illustrations");
@@ -16,7 +18,8 @@ const illustrations = await getCollection("illustrations");
             href={`${import.meta.env.BASE_URL}illustrations/${illustration.id}`}
             class="illustration-link"
           >
-            {illustration.data.title}
+            <Image src={catImage} alt={illustration.data.title} class="illustration-image" />
+            <span class="illustration-title">{illustration.data.title}</span>
           </a>
         </li>
       ))
@@ -39,41 +42,65 @@ const illustrations = await getCollection("illustrations");
     margin-top: 2rem;
   }
 
+  @media (max-width: 40.625rem) {
+    .illustrations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .illustration-card {
     list-style: none;
   }
 
   .illustration-link {
     font-family: "Aesthetic";
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
-    display: block;
-    background-color: rgb(166, 1, 59);
-    color: white;
-    padding: 0.9rem 1.2rem;
-    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: rgb(166, 1, 59);
+    border-radius: 1rem;
     text-decoration: none;
     text-align: center;
     font-weight: 600;
+    overflow: hidden;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition:
       transform 0.15s ease,
-      opacity 0.15s ease;
+      box-shadow 0.15s ease;
+  }
+
+  .illustration-image {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+
+  .illustration-title {
+    display: block;
+    padding: 1.2rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
   }
 
   .illustration-link:hover {
-    transform: translateY(-0.2rem);
-    opacity: 0.8;
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
 
   html.dark .illustration-link {
+    background-color: rgb(28, 0, 10);
+    color: #f9f6f1;
+  }
+
+  html.dark .illustration-title {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
   }
 
   html.dark .illustration-link:hover {
-    background-color: #f9f6f1;
-    color: rgb(28, 0, 10);
-    opacity: 0.8;
+    box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.1);
   }
 
   .navigation-button {

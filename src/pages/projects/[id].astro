@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import catImage from "../../assets/images/cat.jpg";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -23,8 +25,13 @@ const { Content } = await render(project);
     >← Back to Projects</a
   >
   <h1 class="post-title">{project.data.title}</h1>
-  <p class="description">{project.data.description}</p>
-  <Content />
+  <div class="content-wrapper">
+    <Image src={catImage} alt={project.data.title} class="project-image" />
+    <div class="text-content">
+      <p class="description">{project.data.description}</p>
+      <Content />
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
@@ -64,13 +71,38 @@ const { Content } = await render(project);
 
   .post-title {
     font-family: "Aesthetic" !important;
-    font-size: clamp(5rem, 10vw, 10rem) !important;
+    font-size: clamp(4rem, 8vw, 8rem) !important;
     margin: 1rem 0 !important;
     text-transform: uppercase !important;
+    line-height: 0.9 !important;
   }
 
   .description {
     font-size: clamp(1.5rem, 2.5vw, 1.5rem);
     margin-bottom: 2rem;
+  }
+
+  .content-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 40.625rem) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+  }
+
+  .project-image {
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    border-radius: 1rem;
+    flex-shrink: 0;
+  }
+
+  .text-content {
+    flex: 1;
   }
 </style>

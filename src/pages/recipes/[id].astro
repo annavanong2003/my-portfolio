@@ -18,16 +18,50 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { recipe } = Astro.props;
 const { Content } = await render(recipe);
+
+// Split content into sections - get raw markdown
+const body = recipe.body;
+const ingredientsMatch = body.match(/## Ingredients\n([\s\S]*?)(?=## Instructions|$)/);
+const instructionsMatch = body.match(/## Instructions\n([\s\S]*?)$/);
+
+// Convert markdown lists to HTML
+function markdownToHtml(markdown: string) {
+  return markdown
+    .split('\n')
+    .map(line => {
+      if (line.match(/^- /)) {
+        return `<li>${line.substring(2)}</li>`;
+      } else if (line.match(/^\d+\. /)) {
+        return `<li>${line.replace(/^\d+\. /, '')}</li>`;
+      }
+      return line;
+    })
+    .join('\n');
+}
+
+const ingredientsHtml = ingredientsMatch ? `<ul>${markdownToHtml(ingredientsMatch[1].trim())}</ul>` : '';
+const instructionsHtml = instructionsMatch ? `<ol>${markdownToHtml(instructionsMatch[1].trim())}</ol>` : '';
 ---
 
 <BaseLayout pageTitle="">
   <a href={`${import.meta.env.BASE_URL}recipes`} class="back-button"
     >← Back to Recipes</a
   >
-  <Image src={catImage} alt={recipe.data.title} class="recipe-image" />
   <h1 class="post-title">{recipe.data.title}</h1>
   <p class="description">{recipe.data.description}</p>
-  <Content />
+  
+  <div class="content-wrapper">
+    <Image src={catImage} alt={recipe.data.title} class="recipe-image" />
+    <div class="text-content">
+      <h2>Ingredients</h2>
+      <div set:html={ingredientsHtml} />
+    </div>
+  </div>
+  
+  <div class="instructions-section">
+    <h2>Instructions</h2>
+    <div set:html={instructionsHtml} />
+  </div>
 </BaseLayout>
 
 <style>
@@ -67,9 +101,10 @@ const { Content } = await render(recipe);
 
   .post-title {
     font-family: "Aesthetic" !important;
-    font-size: clamp(5rem, 10vw, 10rem) !important;
+    font-size: clamp(4rem, 8vw, 8rem) !important;
     margin: 1rem 0 !important;
     text-transform: uppercase !important;
+    line-height: 0.9 !important;
   }
 
   .description {
@@ -77,12 +112,39 @@ const { Content } = await render(recipe);
     margin-bottom: 2rem;
   }
 
+  .content-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 40.625rem) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+  }
+
   .recipe-image {
     width: 100%;
-    max-width: 50rem;
+    max-width: 20rem;
     height: auto;
     border-radius: 1rem;
-    margin: 2rem 0;
-    display: block;
+    flex-shrink: 0;
+  }
+
+  .text-content {
+    flex: 1;
+  }
+
+  .instructions-section {
+    margin-top: 3rem;
+  }
+
+  .text-content h2,
+  .instructions-section h2 {
+    font-family: "Aesthetic";
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
 </style>
