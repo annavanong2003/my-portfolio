@@ -21,26 +21,32 @@ const { Content } = await render(recipe);
 
 // Split content into sections - get raw markdown
 const body = recipe.body;
-const ingredientsMatch = body.match(/## Ingredients\n([\s\S]*?)(?=## Instructions|$)/);
+const ingredientsMatch = body.match(
+  /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
+);
 const instructionsMatch = body.match(/## Instructions\n([\s\S]*?)$/);
 
 // Convert markdown lists to HTML
 function markdownToHtml(markdown: string) {
   return markdown
-    .split('\n')
-    .map(line => {
+    .split("\n")
+    .map((line) => {
       if (line.match(/^- /)) {
         return `<li>${line.substring(2)}</li>`;
       } else if (line.match(/^\d+\. /)) {
-        return `<li>${line.replace(/^\d+\. /, '')}</li>`;
+        return `<li>${line.replace(/^\d+\. /, "")}</li>`;
       }
       return line;
     })
-    .join('\n');
+    .join("\n");
 }
 
-const ingredientsHtml = ingredientsMatch ? `<ul>${markdownToHtml(ingredientsMatch[1].trim())}</ul>` : '';
-const instructionsHtml = instructionsMatch ? `<ol>${markdownToHtml(instructionsMatch[1].trim())}</ol>` : '';
+const ingredientsHtml = ingredientsMatch
+  ? `<ul>${markdownToHtml(ingredientsMatch[1].trim())}</ul>`
+  : "";
+const instructionsHtml = instructionsMatch
+  ? `<ol>${markdownToHtml(instructionsMatch[1].trim())}</ol>`
+  : "";
 ---
 
 <BaseLayout pageTitle="">
@@ -49,7 +55,7 @@ const instructionsHtml = instructionsMatch ? `<ol>${markdownToHtml(instructionsM
   >
   <h1 class="post-title">{recipe.data.title}</h1>
   <p class="description">{recipe.data.description}</p>
-  
+
   <div class="content-wrapper">
     <Image src={catImage} alt={recipe.data.title} class="recipe-image" />
     <div class="text-content">
@@ -57,7 +63,7 @@ const instructionsHtml = instructionsMatch ? `<ol>${markdownToHtml(instructionsM
       <div set:html={ingredientsHtml} />
     </div>
   </div>
-  
+
   <div class="instructions-section">
     <h2>Instructions</h2>
     <div set:html={instructionsHtml} />

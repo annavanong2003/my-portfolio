@@ -18,7 +18,11 @@ const recipes = await getCollection("recipes");
             href={`${import.meta.env.BASE_URL}recipes/${recipe.id}`}
             class="recipe-link"
           >
-            <Image src={catImage} alt={recipe.data.title} class="recipe-image" />
+            <Image
+              src={catImage}
+              alt={recipe.data.title}
+              class="recipe-image"
+            />
             <span class="recipe-title">{recipe.data.title}</span>
           </a>
         </li>

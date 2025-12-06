@@ -29,7 +29,11 @@ const pageTitle = "Projects";
             href={`${import.meta.env.BASE_URL}projects/${project.id}`}
             class="project-link"
           >
-            <Image src={catImage} alt={project.data.title} class="project-image" />
+            <Image
+              src={catImage}
+              alt={project.data.title}
+              class="project-image"
+            />
             <span class="project-title">{project.data.title}</span>
           </a>
         </li>
