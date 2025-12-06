@@ -20,7 +20,9 @@ const pageTitle = "Projects";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.6;">Here you can find my previous projects I worked on</p>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.6;">
+    Here you can find my previous projects I worked on
+  </p>
   <ul class="projects-grid">
     {
       page.data.map((project) => (

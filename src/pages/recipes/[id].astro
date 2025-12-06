@@ -20,7 +20,7 @@ const { recipe } = Astro.props;
 const { Content } = await render(recipe);
 
 // Split content into sections - get raw markdown
-const body = recipe.body || '';
+const body = recipe.body || "";
 const ingredientsMatch = body.match(
   /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
 );
