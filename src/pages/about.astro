@@ -11,17 +11,19 @@ const skills = await getCollection("skills");
   <div class="about-content">
     <Image src={catImage} alt="About me" class="about-image" />
     <p>Learn more about me and my creative journey.</p>
-    
+
     <h2>Skills & Tools</h2>
     <ul class="skills-grid">
-      {skills.map((skill) => (
-        <li class="skill-card">
-          <span class="skill-icon">{skill.data.icon}</span>
-          <h3>{skill.data.name}</h3>
-          <p class="skill-category">{skill.data.category}</p>
-          <p class="skill-level">{skill.data.level}</p>
-        </li>
-      ))}
+      {
+        skills.map((skill) => (
+          <li class="skill-card">
+            <span class="skill-icon">{skill.data.icon}</span>
+            <h3>{skill.data.name}</h3>
+            <p class="skill-category">{skill.data.category}</p>
+            <p class="skill-level">{skill.data.level}</p>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </BaseLayout>
@@ -50,14 +52,14 @@ const skills = await getCollection("skills");
 
   h2 {
     font-family: "Aesthetic";
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     text-align: center;
     margin: 3rem 0 2rem 0;
   }
 
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     padding: 0;
     list-style: none;

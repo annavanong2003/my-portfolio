@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 const {
   pageTitle,
   description = "Portfolio showcasing creative projects, illustrations, and recipes by Anna Van Ong",
+  isHomepage = false,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL("/favicon.svg", Astro.site);
@@ -109,6 +110,13 @@ const socialImage = new URL("/favicon.svg", Astro.site);
         font-size: clamp(3rem, 6vw, 6rem);
         font-family: "Aesthetic";
         text-transform: uppercase;
+      }
+
+      h1.homepage-title {
+        font-size: clamp(7rem, 14vw, 14rem);
+        font-weight: bold;
+        text-align: center;
+        margin: 1rem auto;
       }
 
       h2 {
@@ -220,7 +228,7 @@ const socialImage = new URL("/favicon.svg", Astro.site);
     </div>
 
     <Header />
-    <h1>{pageTitle}</h1>
+    <h1 class:list={[{ "homepage-title": isHomepage }]}>{pageTitle}</h1>
     <slot />
     <Footer />
 

@@ -3,23 +3,24 @@ import Layout from "../layouts/BaseLayout.astro";
 const pageTitle = "Portfolio";
 ---
 
-<Layout pageTitle={pageTitle}>
+<Layout pageTitle={pageTitle} isHomepage={true}>
   <div class="intro-text">
-    <p>Hello! I'm Anna. </br>
-      This portfolio gathers my latest projects </br> alongside my favourite illustrations. </br>
-      Take a look around and enjoy the mix.</p>
+    <p>Hello! I'm Anna.</p>
+    This portfolio gathers my latest projects
   </div>
+  alongside my favourite illustrations.
 </Layout>
+Take a look around and enjoy the mix.
 
 <script>
   import { gsap } from "gsap";
-  
+
   // Animate the title when page loads
   gsap.from("h1", {
     duration: 1.5,
     y: -50,
     opacity: 0,
-    ease: "power3.out"
+    ease: "power3.out",
   });
 
   // Animate the intro text
@@ -28,7 +29,7 @@ const pageTitle = "Portfolio";
     y: 30,
     opacity: 0,
     delay: 0.3,
-    ease: "power3.out"
+    ease: "power3.out",
   });
 
   // Animate navigation links
@@ -38,15 +39,11 @@ const pageTitle = "Portfolio";
     opacity: 0,
     stagger: 0.1,
     delay: 0.8,
-    ease: "power2.out"
+    ease: "power2.out",
   });
 </script>
 
 <style>
-  h1 {
-    font-size: clamp(5rem, 10vw, 10rem) !important;
-  }
-
   p {
     font-size: clamp(1.65rem, 2.75vw, 1.65rem);
     line-height: 1.6;
