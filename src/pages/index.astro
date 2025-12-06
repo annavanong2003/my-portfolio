@@ -4,10 +4,43 @@ const pageTitle = "Portfolio";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <p>Hello! I'm Anna.</p>
-  This portfolio gathers my latest projects
-</Layout> alongside my favourite illustrations. Take a look around and enjoy the
-mix.
+  <div class="intro-text">
+    <p>Hello! I'm Anna. </br>
+      This portfolio gathers my latest projects </br> alongside my favourite illustrations. </br>
+      Take a look around and enjoy the mix.</p>
+  </div>
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  
+  // Animate the title when page loads
+  gsap.from("h1", {
+    duration: 1.5,
+    y: -50,
+    opacity: 0,
+    ease: "power3.out"
+  });
+
+  // Animate the intro text
+  gsap.from(".intro-text", {
+    duration: 1.5,
+    y: 30,
+    opacity: 0,
+    delay: 0.3,
+    ease: "power3.out"
+  });
+
+  // Animate navigation links
+  gsap.from(".nav-links a", {
+    duration: 0.8,
+    y: 20,
+    opacity: 0,
+    stagger: 0.1,
+    delay: 0.8,
+    ease: "power2.out"
+  });
+</script>
 
 <style>
   h1 {
@@ -17,5 +50,9 @@ mix.
   p {
     font-size: clamp(1.65rem, 2.75vw, 1.65rem);
     line-height: 1.6;
+  }
+
+  .intro-text {
+    opacity: 0;
   }
 </style>

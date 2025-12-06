@@ -28,9 +28,21 @@ const recipesCollection = defineCollection({
     }),
 });
 
+const skillsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/skills" }),
+  schema: ({ }) =>
+    z.object({
+      name: z.string(),
+      category: z.string(),
+      level: z.string(),
+      icon: z.string(),
+    }),
+});
+
 export const collections = {
   projects: projectsCollection,
   illustrations: illustrationsCollection,
   recipes: recipesCollection,
+  skills: skillsCollection,
 };
 
