@@ -25,12 +25,11 @@ const { Content } = await render(project);
     >← Back to Projects</a
   >
   <h1 class="post-title">{project.data.title}</h1>
-  <div class="content-wrapper">
-    <Image src={catImage} alt={project.data.title} class="project-image" />
-    <div class="text-content">
-      <p class="description">{project.data.description}</p>
-      <Content />
-    </div>
+  <p class="description">{project.data.description}</p>
+  <Content />
+  
+  <div class="gallery">
+    <Image src={catImage} alt={project.data.title} class="gallery-image" />
   </div>
 </BaseLayout>
 
@@ -39,7 +38,6 @@ const { Content } = await render(project);
     display: inline-block;
     font-family: "Aesthetic";
     font-size: 1.5rem;
-    text-transform: uppercase;
     background-color: rgb(166, 1, 59);
     color: white;
     padding: 0.7rem 1rem;
@@ -73,36 +71,37 @@ const { Content } = await render(project);
     font-family: "Aesthetic" !important;
     font-size: clamp(4rem, 8vw, 8rem) !important;
     margin: 1rem 0 !important;
-    text-transform: uppercase !important;
     line-height: 0.9 !important;
   }
 
   .description {
-    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.65rem, 2.75vw, 1.65rem);
     margin-bottom: 2rem;
+    line-height: 1.6;
   }
 
-  .content-wrapper {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.125rem solid rgb(166, 1, 59);
   }
 
   @media (max-width: 40.625rem) {
-    .content-wrapper {
-      flex-direction: column;
+    .gallery {
+      grid-template-columns: 1fr;
     }
   }
 
-  .project-image {
+  .gallery-image {
     width: 100%;
-    max-width: 20rem;
     height: auto;
     border-radius: 1rem;
-    flex-shrink: 0;
   }
 
-  .text-content {
-    flex: 1;
+  html.dark .gallery {
+    border-top-color: #f9f6f1;
   }
 </style>

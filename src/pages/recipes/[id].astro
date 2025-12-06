@@ -20,7 +20,7 @@ const { recipe } = Astro.props;
 const { Content } = await render(recipe);
 
 // Split content into sections - get raw markdown
-const body = recipe.body;
+const body = recipe.body || '';
 const ingredientsMatch = body.match(
   /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
 );
@@ -75,7 +75,6 @@ const instructionsHtml = instructionsMatch
     display: inline-block;
     font-family: "Aesthetic";
     font-size: 1.5rem;
-    text-transform: uppercase;
     background-color: rgb(166, 1, 59);
     color: white;
     padding: 0.7rem 1rem;
@@ -109,19 +108,20 @@ const instructionsHtml = instructionsMatch
     font-family: "Aesthetic" !important;
     font-size: clamp(4rem, 8vw, 8rem) !important;
     margin: 1rem 0 !important;
-    text-transform: uppercase !important;
     line-height: 0.9 !important;
+    white-space: nowrap;
   }
 
   .description {
-    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.65rem, 2.75vw, 1.65rem);
     margin-bottom: 2rem;
+    line-height: 1.6;
   }
 
   .content-wrapper {
     display: flex;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: center;
   }
 
   @media (max-width: 40.625rem) {
@@ -150,7 +150,6 @@ const instructionsHtml = instructionsMatch
   .instructions-section h2 {
     font-family: "Aesthetic";
     font-size: 2rem;
-    text-transform: uppercase;
     margin-bottom: 1rem;
   }
 </style>

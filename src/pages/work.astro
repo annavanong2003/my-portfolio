@@ -4,7 +4,7 @@ const pageTitle = "My work";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Here you can find my previous projects</p>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.6;">Here you can find my previous projects</p>
   <ul class="work-grid">
     <li class="work-card">
       <a href={`${import.meta.env.BASE_URL}projects`} class="work-link"
@@ -31,7 +31,6 @@ const pageTitle = "My work";
   .work-link {
     font-family: "Aesthetic";
     font-size: 2rem;
-    text-transform: uppercase;
     display: block;
     background-color: rgb(166, 1, 59);
     color: white;

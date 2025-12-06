@@ -20,7 +20,7 @@ const pageTitle = "Projects";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Here you can find my previous projects I worked on</p>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.6;">Here you can find my previous projects I worked on</p>
   <ul class="projects-grid">
     {
       page.data.map((project) => (
@@ -85,7 +85,6 @@ const pageTitle = "Projects";
   .project-link {
     font-family: "Aesthetic";
     font-size: 1.5rem;
-    text-transform: uppercase;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -145,7 +144,6 @@ const pageTitle = "Projects";
     display: inline-block;
     font-family: "Aesthetic";
     font-size: 1.2rem;
-    text-transform: uppercase;
     background-color: rgb(166, 1, 59);
     color: white;
     padding: 0.6rem 0.9rem;

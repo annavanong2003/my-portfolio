@@ -9,7 +9,7 @@ const recipes = await getCollection("recipes");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>Explore my favorite recipes and culinary experiments</p>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.6;">Explore my favorite recipes and culinary experiments</p>
   <ul class="recipes-grid">
     {
       recipes.map((recipe) => (
@@ -59,7 +59,6 @@ const recipes = await getCollection("recipes");
   .recipe-link {
     font-family: "Aesthetic";
     font-size: 1.5rem;
-    text-transform: uppercase;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -116,7 +115,6 @@ const recipes = await getCollection("recipes");
     display: inline-block;
     font-family: "Aesthetic";
     font-size: 1.2rem;
-    text-transform: uppercase;
     background-color: rgb(166, 1, 59);
     color: white;
     padding: 0.6rem 0.9rem;
