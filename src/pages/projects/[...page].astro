@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import type { CollectionEntry } from "astro:content";
 import catImage from "../../assets/images/cat.jpg";
+import scrapforestImage from "../../assets/images/scrapforest.png";
 import { Image } from "astro:assets";
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -20,7 +21,7 @@ const pageTitle = "Projects";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.6;">
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
     Here you can find my previous projects I worked on
   </p>
   <ul class="projects-grid">
@@ -32,7 +33,7 @@ const pageTitle = "Projects";
             class="project-link"
           >
             <Image
-              src={catImage}
+              src={project.id === "scrapforest" ? scrapforestImage : catImage}
               alt={project.data.title}
               class="project-image"
             />

@@ -1,19 +1,19 @@
 ---
 title: Scrapforest
-description: "A whimsical tourism homepage for a world built from forgotten things"
+description: "A whimsical tourism website for a world built from forgotten things"
 ---
 
 ## Project Overview
 
 Scrapforest is a fictional travel destination where lost objects find a second life—and a community of their own.
-This project challenged me to design a homepage that blends playful storytelling, custom illustration work, and contemporary UI design into one coherent experience.
+This project challenged me to design a website that blends playful storytelling, custom illustration work, and contemporary UI design into one coherent experience.
 
 The result is a warm, character-driven website full of humor, texture, and handmade charm, aimed at curious travelers who enjoy unconventional destinations.
 
 ## Technologies & Tools
 
 - Figma – layout, structure, and high-fidelity UI
-- Photoshop + Illustrator – custom illustrations, textures, and visual elements
+- Procreate – custom illustrations, textures, and visual elements
 - Hand-drawn assets – no templates, no AI-generated graphics
 - User-friendly content hierarchy & clear CTAs
 
@@ -74,3 +74,5 @@ Practical information wrapped in a warm, friendly tone, closing the page with co
 3. Iterated the homepage design through feedback loops
 4. Built a fully custom set of illustrations, icons, backgrounds, and UI components
 5. Documented all steps, from idea to final layout
+
+[View Interactive Figma Prototype](https://www.figma.com/proto/XeTaNxEhlZMOeyUPxjI4BO/Scrapforest?page-id=0%3A1&node-id=1-2&p=f&viewport=423%2C126%2C0.07&t=lErK9hE5ekXBwsRF-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A2)

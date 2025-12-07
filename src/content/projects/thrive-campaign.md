@@ -70,7 +70,7 @@ Fun typography and bold layout choices emphasised switching and contrast.
 ## Technologies & Tools Used
 
 - Figma — UX, UI, prototyping
-- Procreate — campaign assets, concept visuals
+- Illustrator & Photoshop — campaign assets, concept visuals
 - Brand & audience research frameworks from class
 
 ## Process
@@ -117,3 +117,5 @@ A full campaign concept with:
 - Social challenge concept
 - Offline activation idea
 - UGC integration and digital flow
+
+[View Interactive Figma Prototype](https://www.figma.com/proto/RS836b6pSDKYVvChHTDxHH/Campaign-Thrive?page-id=68%3A2&node-id=91-5&viewport=201%2C105%2C0.04&t=K9YYElbjeDupUWJY-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=91%3A5)

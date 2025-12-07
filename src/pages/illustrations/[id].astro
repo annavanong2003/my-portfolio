@@ -26,7 +26,9 @@ const { Content } = await render(illustration);
   >
   <h1 class="post-title">{illustration.data.title}</h1>
   <p class="description">{illustration.data.description}</p>
-  <Content />
+  <div class="markdown-content">
+    <Content />
+  </div>
 
   <div class="gallery">
     <Image src={catImage} alt="Gallery image 1" class="gallery-image" />
@@ -35,6 +37,18 @@ const { Content } = await render(illustration);
     <Image src={catImage} alt="Gallery image 4" class="gallery-image" />
   </div>
 </BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a[href^="http"]');
+    links.forEach(link => {
+      if (!link.classList.contains('back-button')) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  });
+</script>
 
 <style>
   .back-button {
@@ -80,7 +94,28 @@ const { Content } = await render(illustration);
   .description {
     font-size: clamp(1.65rem, 2.75vw, 1.65rem);
     margin-bottom: 2rem;
-    line-height: 1.6;
+    line-height: 1.4;
+  }
+
+  :global(p) {
+    line-height: 1.3 !important;
+  }
+
+  .markdown-content :global(a) {
+    color: rgb(166, 1, 59);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 0.125rem solid rgb(166, 1, 59);
+    transition: opacity 0.15s ease;
+  }
+
+  .markdown-content :global(a:hover) {
+    opacity: 0.7;
+  }
+
+  html.dark .markdown-content :global(a) {
+    color: #f9f6f1;
+    border-bottom-color: #f9f6f1;
   }
 
   .gallery {
