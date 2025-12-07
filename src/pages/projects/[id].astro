@@ -38,9 +38,20 @@ const projectImage =
     <Content />
   </div>
 
-  <div class="gallery">
-    <Image src={projectImage} alt={project.data.title} class="gallery-image" />
-  </div>
+  {id === "generative-masks" ? (
+    <div class="sketch-container">
+      <iframe 
+        src={`${import.meta.env.BASE_URL}sketches/index.html`}
+        title="Generative Masks Live Demo"
+        class="sketch-iframe"
+      ></iframe>
+      <p class="sketch-instruction">Click on the canvas to generate a new mask!</p>
+    </div>
+  ) : (
+    <div class="gallery">
+      <Image src={projectImage} alt={project.data.title} class="gallery-image" />
+    </div>
+  )}
 </BaseLayout>
 
 <script>
@@ -146,5 +157,39 @@ const projectImage =
 
   html.dark .gallery {
     border-top-color: #f9f6f1;
+  }
+
+  .sketch-container {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.125rem solid rgb(166, 1, 59);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sketch-iframe {
+    width: 100%;
+    max-width: 450px;
+    height: 800px;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  .sketch-instruction {
+    font-size: 1.25rem;
+    color: rgb(166, 1, 59);
+    font-style: italic;
+    text-align: center;
+  }
+
+  html.dark .sketch-container {
+    border-top-color: #f9f6f1;
+  }
+
+  html.dark .sketch-instruction {
+    color: #f9f6f1;
   }
 </style>
