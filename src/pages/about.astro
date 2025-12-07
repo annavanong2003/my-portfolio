@@ -7,17 +7,25 @@ const pageTitle = "About";
 const allSkills = await getCollection("skills");
 
 // Group skills by category
-const groupedSkills = allSkills.reduce((acc, skill) => {
-  const category = skill.data.category;
-  if (!acc[category]) {
-    acc[category] = [];
-  }
-  acc[category].push(skill);
-  return acc;
-}, {} as Record<string, typeof allSkills>);
+const groupedSkills = allSkills.reduce(
+  (acc, skill) => {
+    const category = skill.data.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(skill);
+    return acc;
+  },
+  {} as Record<string, typeof allSkills>
+);
 
 // Define category order
-const categoryOrder = ["Design & Development", "Photography & Creative", "Tools & Workflow", "Languages"];
+const categoryOrder = [
+  "Design & Development",
+  "Photography & Creative",
+  "Tools & Workflow",
+  "Languages",
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
