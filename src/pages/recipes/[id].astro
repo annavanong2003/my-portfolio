@@ -72,7 +72,15 @@ const nutritionalFactsHtml = nutritionalFactsMatch
 
   <div class="content-wrapper">
     <Image
-      src={id === "autumn-salad" ? autumnSaladImage : id === "cashew-chicken" ? chickenImage : id === "chocolate-chip-cookies" ? cookiesImage : id === "banana-bread" ? bananaImage : catImage}
+      src={id === "autumn-salad"
+        ? autumnSaladImage
+        : id === "cashew-chicken"
+          ? chickenImage
+          : id === "chocolate-chip-cookies"
+            ? cookiesImage
+            : id === "banana-bread"
+              ? bananaImage
+              : catImage}
       alt={recipe.data.title}
       class="recipe-image"
     />

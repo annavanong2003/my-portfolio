@@ -25,7 +25,17 @@ const recipes = await getCollection("recipes");
             class="recipe-link"
           >
             <Image
-              src={recipe.id === "autumn-salad" ? autumnSaladImage : recipe.id === "cashew-chicken" ? chickenImage : recipe.id === "chocolate-chip-cookies" ? cookiesImage : recipe.id === "banana-bread" ? bananaImage : catImage}
+              src={
+                recipe.id === "autumn-salad"
+                  ? autumnSaladImage
+                  : recipe.id === "cashew-chicken"
+                    ? chickenImage
+                    : recipe.id === "chocolate-chip-cookies"
+                      ? cookiesImage
+                      : recipe.id === "banana-bread"
+                        ? bananaImage
+                        : catImage
+              }
               alt={recipe.data.title}
               class="recipe-image"
             />
