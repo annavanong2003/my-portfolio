@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import catImage from "../../assets/images/cat.jpg";
+import autumnSaladImage from "../../assets/images/Autumn salad.jpg";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
@@ -25,9 +26,10 @@ const ingredientsMatch = body.match(
   /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
 );
 const instructionsMatch = body.match(
-  /## Instructions\n([\s\S]*?)(?=## Tips|$)/
+  /## Instructions\n([\s\S]*?)(?=## Tips|## Nutritional Facts|$)/
 );
-const tipsMatch = body.match(/## Tips\n([\s\S]*?)$/);
+const tipsMatch = body.match(/## Tips\n([\s\S]*?)(?=## Nutritional Facts|$)/);
+const nutritionalFactsMatch = body.match(/## Nutritional Facts\n([\s\S]*?)$/);
 
 // Convert markdown lists to HTML
 function markdownToHtml(markdown: string) {
@@ -53,6 +55,9 @@ const instructionsHtml = instructionsMatch
 const tipsHtml = tipsMatch
   ? `<ul>${markdownToHtml(tipsMatch[1].trim())}</ul>`
   : "";
+const nutritionalFactsHtml = nutritionalFactsMatch
+  ? `<ul>${markdownToHtml(nutritionalFactsMatch[1].trim())}</ul>`
+  : "";
 ---
 
 <BaseLayout pageTitle="">
@@ -63,7 +68,7 @@ const tipsHtml = tipsMatch
   <p class="description">{recipe.data.description}</p>
 
   <div class="content-wrapper">
-    <Image src={catImage} alt={recipe.data.title} class="recipe-image" />
+    <Image src={id === "autumn-salad" ? autumnSaladImage : catImage} alt={recipe.data.title} class="recipe-image" />
     <div class="text-content">
       <h2>Ingredients</h2>
       <div set:html={ingredientsHtml} />
@@ -80,6 +85,15 @@ const tipsHtml = tipsMatch
       <div class="tips-section">
         <h2>Tips</h2>
         <div set:html={tipsHtml} />
+      </div>
+    )
+  }
+
+  {
+    nutritionalFactsHtml && (
+      <div class="nutritional-facts-section">
+        <h2>Nutritional Facts</h2>
+        <div set:html={nutritionalFactsHtml} />
       </div>
     )
   }
@@ -198,9 +212,14 @@ const tipsHtml = tipsMatch
     margin-top: 3rem;
   }
 
+  .nutritional-facts-section {
+    margin-top: 3rem;
+  }
+
   .text-content h2,
   .instructions-section h2,
-  .tips-section h2 {
+  .tips-section h2,
+  .nutritional-facts-section h2 {
     font-family: "Aesthetic";
     font-size: 2rem;
     margin-bottom: 1rem;
