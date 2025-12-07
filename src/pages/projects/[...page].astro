@@ -8,7 +8,7 @@ import scrapforestImage from "../../assets/images/projects/scrapforest.png";
 import thrivecampaignImage from "../../assets/images/projects/thrivecampaign.png";
 import maskImage from "../../assets/images/projects/mask.png";
 import portrait1 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result1.png";
-import { Image } from "astro:assets";
+import ResponsiveImage from "../../components/ResponsiveImage.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const projects = await getCollection("projects");
@@ -35,7 +35,7 @@ const pageTitle = "Projects";
             href={`${import.meta.env.BASE_URL}projects/${project.id}`}
             class="project-link"
           >
-            <Image
+            <ResponsiveImage
               src={
                 project.id === "scrapforest"
                   ? scrapforestImage
@@ -49,6 +49,10 @@ const pageTitle = "Projects";
               }
               alt={project.data.title}
               class="project-image"
+              loading="lazy"
+              sizes="(min-width: 66em) 25vw, (min-width: 44em) 33vw, 50vw"
+              width={800}
+              height={600}
             />
             <span class="project-title">{project.data.title}</span>
           </a>
@@ -59,17 +63,17 @@ const pageTitle = "Projects";
 
   {
     page.lastPage > 1 && (
-      <nav class="pagination">
+      <nav class="pagination" aria-label="Pagination">
         {page.url.prev && (
-          <a href={page.url.prev} class="pagination-link">
+          <a href={page.url.prev} class="pagination-link" aria-label="Go to previous page">
             ← Previous
           </a>
         )}
-        <span class="pagination-info">
+        <span class="pagination-info" aria-current="page">
           Page {page.currentPage} of {page.lastPage}
         </span>
         {page.url.next && (
-          <a href={page.url.next} class="pagination-link">
+          <a href={page.url.next} class="pagination-link" aria-label="Go to next page">
             Next →
           </a>
         )}

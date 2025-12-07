@@ -2,14 +2,23 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import catImage from "../assets/images/cat.jpg";
-import { Image } from "astro:assets";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
 const pageTitle = "About";
 const skills = await getCollection("skills");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="about-content">
-    <Image src={catImage} alt="About me" class="about-image" />
+    <ResponsiveImage 
+      src={catImage} 
+      alt="About me" 
+      class="about-image" 
+      loading="eager" 
+      fetchpriority="high"
+      sizes="(min-width: 66em) 40rem, (min-width: 44em) 60vw, 90vw"
+      width={800}
+      height={600}
+    />
     <p>Learn more about me and my creative journey.</p>
 
     <h2>Skills & Tools</h2>

@@ -24,6 +24,8 @@ const illustrations = await getCollection("illustrations");
               src={catImage}
               alt={illustration.data.title}
               class="illustration-image"
+              loading="lazy"
+              decoding="async"
             />
             <span class="illustration-title">{illustration.data.title}</span>
           </a>

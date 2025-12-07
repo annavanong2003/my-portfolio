@@ -230,6 +230,23 @@ const socialImage = new URL("/favicon.png", Astro.site);
         color: #f9f6f1;
       }
 
+      /* Skip to content link */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: rgb(166, 1, 59);
+        color: white;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        font-weight: 600;
+        z-index: 100;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
       @media screen and (min-width: 39.75rem) {
         body {
           max-width: 85ch;
@@ -238,6 +255,8 @@ const socialImage = new URL("/favicon.png", Astro.site);
     </style>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div class="theme-toggle" role="group" aria-label="Theme switch">
       <input
         type="checkbox"
@@ -250,7 +269,9 @@ const socialImage = new URL("/favicon.png", Astro.site);
 
     <Header />
     <h1 class:list={[{ "homepage-title": isHomepage }]}>{pageTitle}</h1>
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
 
     <script>

@@ -83,6 +83,9 @@ const nutritionalFactsHtml = nutritionalFactsMatch
               : catImage}
       alt={recipe.data.title}
       class="recipe-image"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
     />
     <div class="text-content">
       <h2>Ingredients</h2>

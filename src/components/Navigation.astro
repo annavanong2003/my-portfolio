@@ -2,7 +2,7 @@
 
 ---
 
-<div id="main-menu" class="nav-links">
+<div id="main-menu" class="nav-links" hidden>
   <a href={`${import.meta.env.BASE_URL}`}>Home</a>
   <a href={`${import.meta.env.BASE_URL}work`}>Work</a>
   <a href={`${import.meta.env.BASE_URL}about`}>About</a>
@@ -41,6 +41,13 @@
 
   :global(:has(.menu[aria-expanded="true"])) .nav-links {
     display: flex;
+  }
+
+  /* Show navigation on desktop */
+  @media screen and (min-width: 40.625rem) {
+    .nav-links[hidden] {
+      display: flex !important;
+    }
   }
 
   html.dark .nav-links a:hover,

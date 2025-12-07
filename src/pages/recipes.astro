@@ -6,7 +6,7 @@ import autumnSaladImage from "../assets/images/recipes/Autumn salad.png";
 import chickenImage from "../assets/images/recipes/chicken.png";
 import cookiesImage from "../assets/images/recipes/chocolatechicpcookies.png";
 import bananaImage from "../assets/images/recipes/Banana.png";
-import { Image } from "astro:assets";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
 
 const pageTitle = "Recipes";
 const recipes = await getCollection("recipes");
@@ -15,6 +15,9 @@ const recipes = await getCollection("recipes");
 <BaseLayout pageTitle={pageTitle}>
   <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
     Explore my favorite recipes and culinary experiments
+    <a href={`${import.meta.env.BASE_URL}recipes/rss.xml`} class="rss-link" aria-label="Subscribe to recipes RSS feed">
+      📡 RSS
+    </a>
   </p>
   <ul class="recipes-grid">
     {
@@ -24,7 +27,7 @@ const recipes = await getCollection("recipes");
             href={`${import.meta.env.BASE_URL}recipes/${recipe.id}`}
             class="recipe-link"
           >
-            <Image
+            <ResponsiveImage
               src={
                 recipe.id === "autumn-salad"
                   ? autumnSaladImage
@@ -38,6 +41,10 @@ const recipes = await getCollection("recipes");
               }
               alt={recipe.data.title}
               class="recipe-image"
+              loading="lazy"
+              sizes="(min-width: 66em) 25vw, (min-width: 44em) 33vw, 50vw"
+              width={800}
+              height={600}
             />
             <span class="recipe-title">{recipe.data.title}</span>
           </a>
@@ -56,6 +63,27 @@ const recipes = await getCollection("recipes");
 </BaseLayout>
 
 <style>
+  .rss-link {
+    display: inline-block;
+    margin-left: 1rem;
+    padding: 0.25rem 0.75rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    transition: opacity 0.15s ease;
+  }
+
+  .rss-link:hover {
+    opacity: 0.8;
+  }
+
+  html.dark .rss-link {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
   .recipes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));

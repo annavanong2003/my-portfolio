@@ -38,9 +38,31 @@
 
 <script>
   const menu = document.querySelector(".menu");
+  const nav = document.getElementById("main-menu");
 
   menu?.addEventListener("click", () => {
     const isExpanded = menu.getAttribute("aria-expanded") === "true";
-    menu.setAttribute("aria-expanded", `${!isExpanded}`);
+    const newState = !isExpanded;
+    
+    menu.setAttribute("aria-expanded", `${newState}`);
+    
+    if (nav) {
+      nav.hidden = !newState;
+      
+      // Focus management
+      if (newState) {
+        const firstLink = nav.querySelector("a");
+        firstLink?.focus();
+      }
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu?.getAttribute("aria-expanded") === "true") {
+      menu.setAttribute("aria-expanded", "false");
+      if (nav) nav.hidden = true;
+      (menu as HTMLElement).focus();
+    }
   });
 </script>
