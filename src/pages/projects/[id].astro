@@ -20,7 +20,12 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { project } = Astro.props;
 const { Content } = await render(project);
-const projectImage = id === "scrapforest" ? scrapforestImage : id === "thrive-campaign" ? thrivecampaignImage : catImage;
+const projectImage =
+  id === "scrapforest"
+    ? scrapforestImage
+    : id === "thrive-campaign"
+      ? thrivecampaignImage
+      : catImage;
 ---
 
 <BaseLayout pageTitle="">

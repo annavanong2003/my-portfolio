@@ -34,7 +34,13 @@ const pageTitle = "Projects";
             class="project-link"
           >
             <Image
-              src={project.id === "scrapforest" ? scrapforestImage : project.id === "thrive-campaign" ? thrivecampaignImage : catImage}
+              src={
+                project.id === "scrapforest"
+                  ? scrapforestImage
+                  : project.id === "thrive-campaign"
+                    ? thrivecampaignImage
+                    : catImage
+              }
               alt={project.data.title}
               class="project-image"
             />
