@@ -4,6 +4,12 @@ import { getCollection, render } from "astro:content";
 import catImage from "../../assets/images/cat.jpg";
 import scrapforestImage from "../../assets/images/scrapforest.png";
 import thrivecampaignImage from "../../assets/images/thrivecampaign.png";
+import portrait1 from "../../assets/images/1DEV_AnnaVanOngeval_result1.png";
+import portrait2 from "../../assets/images/1DEV_AnnaVanOngeval_result2.png";
+import portrait3 from "../../assets/images/1DEV_AnnaVanOngeval_result3.png";
+import portrait4 from "../../assets/images/1DEV_AnnaVanOngeval_result4.png";
+import portrait5 from "../../assets/images/1DEV_AnnaVanOngeval_result5.png";
+import portrait6 from "../../assets/images/1DEV_AnnaVanOngeval_result6.png";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
@@ -50,12 +56,45 @@ const projectImage =
           Click on the canvas to generate a new mask!
         </p>
       </div>
+    ) : id === "portrait-experimentation" ? (
+      <div class="gallery">
+        <Image
+          src={portrait1}
+          alt="Portrait 1"
+          class="gallery-image"
+        />
+        <Image
+          src={portrait2}
+          alt="Portrait 2"
+          class="gallery-image"
+        />
+        <Image
+          src={portrait3}
+          alt="Portrait 3"
+          class="gallery-image"
+        />
+        <Image
+          src={portrait4}
+          alt="Portrait 4"
+          class="gallery-image"
+        />
+        <Image
+          src={portrait5}
+          alt="Portrait 5"
+          class="gallery-image"
+        />
+        <Image
+          src={portrait6}
+          alt="Portrait 6"
+          class="gallery-image"
+        />
+      </div>
     ) : (
       <div class="gallery">
         <Image
           src={projectImage}
           alt={project.data.title}
-          class="gallery-image"
+          class="gallery-image landscape"
         />
       </div>
     )
@@ -159,8 +198,19 @@ const projectImage =
 
   .gallery-image {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    border-radius: 1rem !important;
+    overflow: hidden;
+  }
+
+  .gallery-image.landscape {
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
     height: auto;
-    border-radius: 1rem;
+    border-radius: 1rem !important;
+    background-color: transparent;
   }
 
   html.dark .gallery {

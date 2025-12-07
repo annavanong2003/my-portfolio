@@ -1,6 +1,6 @@
 ---
 title: Thrive Campaign
-description: "A digital campaign and website for an alcohol-free functional beer brand"
+description: "A campaign and website for an alcohol-free functional beer brand"
 ---
 
 ## College Assignment
