@@ -1,5 +1,5 @@
 ---
-title: Autumn Salad with Apple and Goat Cheese
+title: Autumn Salad
 description: "A colorful fall salad with candied nuts, crispy prosciutto, and maple vinaigrette"
 ---
 
