@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import catImage from "../assets/images/cat.jpg";
+import catImage from "../assets/images/Creaweek.png";
 import autumnSaladImage from "../assets/images/recipes/Autumn salad.png";
 import chickenImage from "../assets/images/recipes/chicken.png";
 import cookiesImage from "../assets/images/recipes/chocolatechicpcookies.png";
@@ -15,13 +15,6 @@ const recipes = await getCollection("recipes");
 <BaseLayout pageTitle={pageTitle}>
   <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
     Explore my favorite recipes and culinary experiments
-    <a
-      href={`${import.meta.env.BASE_URL}recipes/rss.xml`}
-      class="rss-link"
-      aria-label="Subscribe to recipes RSS feed"
-    >
-      📡 RSS
-    </a>
   </p>
   <ul class="recipes-grid">
     {
