@@ -24,7 +24,8 @@ const body = recipe.body || "";
 const ingredientsMatch = body.match(
   /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
 );
-const instructionsMatch = body.match(/## Instructions\n([\s\S]*?)$/);
+const instructionsMatch = body.match(/## Instructions\n([\s\S]*?)(?=## Tips|$)/);
+const tipsMatch = body.match(/## Tips\n([\s\S]*?)$/);
 
 // Convert markdown lists to HTML
 function markdownToHtml(markdown: string) {
@@ -47,6 +48,9 @@ const ingredientsHtml = ingredientsMatch
 const instructionsHtml = instructionsMatch
   ? `<ol>${markdownToHtml(instructionsMatch[1].trim())}</ol>`
   : "";
+const tipsHtml = tipsMatch
+  ? `<ul>${markdownToHtml(tipsMatch[1].trim())}</ul>`
+  : "";
 ---
 
 <BaseLayout pageTitle="">
@@ -68,6 +72,13 @@ const instructionsHtml = instructionsMatch
     <h2>Instructions</h2>
     <div set:html={instructionsHtml} />
   </div>
+
+  {tipsHtml && (
+    <div class="tips-section">
+      <h2>Tips</h2>
+      <div set:html={tipsHtml} />
+    </div>
+  )}
 </BaseLayout>
 
 <script>
@@ -179,8 +190,13 @@ const instructionsHtml = instructionsMatch
     margin-top: 3rem;
   }
 
+  .tips-section {
+    margin-top: 3rem;
+  }
+
   .text-content h2,
-  .instructions-section h2 {
+  .instructions-section h2,
+  .tips-section h2 {
     font-family: "Aesthetic";
     font-size: 2rem;
     margin-bottom: 1rem;

@@ -34,8 +34,7 @@ For the sauce:
 9. Pour in the sauce and mix well. Add a little extra water if the sauce becomes too thick.
 10. Serve hot with rice or noodles.
 
-## Extra Tips
+## Tips
 
-Vegetables to add: carrots, celery, cucumber, broccoli.
-
-Seasoning option: MSG for extra umami flavor.
+- Add extra vegetables like carrots, celery, cucumber, or broccoli for more variety
+- Add a pinch of MSG for extra umami flavor
