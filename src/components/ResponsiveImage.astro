@@ -6,7 +6,7 @@
  * - Width descriptors for srcset
  * - Sizes attribute for viewport-based selection
  * - Proper loading strategies
- * 
+ *
  * Note: In production, you'd generate multiple sizes of each image.
  * For this demo, we're using the same image source to show the markup structure.
  */
@@ -35,7 +35,7 @@ const {
 
 // In production, these would be different size variants
 // For demonstration, we show the proper structure
-const imagePath = typeof src === 'string' ? src : src.src;
+const imagePath = typeof src === "string" ? src : src.src;
 ---
 
 <picture>
@@ -48,7 +48,7 @@ const imagePath = typeof src === 'string' ? src : src.src;
     srcset={`${imagePath} 480w, ${imagePath} 750w, ${imagePath} 1024w, ${imagePath} 1600w`}
     sizes={sizes}
   />
-  
+
   <!-- 
     WebP format - widely supported fallback
     In production, generate: image-480.webp, image-750.webp, image-1024.webp, image-1600.webp
@@ -58,7 +58,7 @@ const imagePath = typeof src === 'string' ? src : src.src;
     srcset={`${imagePath} 480w, ${imagePath} 750w, ${imagePath} 1024w, ${imagePath} 1600w`}
     sizes={sizes}
   />
-  
+
   <!-- 
     JPEG/PNG fallback for older browsers
     Width descriptors tell browser which image to fetch based on viewport size
@@ -81,7 +81,7 @@ const imagePath = typeof src === 'string' ? src : src.src;
   picture {
     display: contents;
   }
-  
+
   img {
     display: block;
     width: 100%;

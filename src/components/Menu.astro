@@ -43,12 +43,12 @@
   menu?.addEventListener("click", () => {
     const isExpanded = menu.getAttribute("aria-expanded") === "true";
     const newState = !isExpanded;
-    
+
     menu.setAttribute("aria-expanded", `${newState}`);
-    
+
     if (nav) {
       nav.hidden = !newState;
-      
+
       // Focus management
       if (newState) {
         const firstLink = nav.querySelector("a");

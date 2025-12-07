@@ -34,10 +34,10 @@ const photos = [
     {
       photos.map((photo, index) => (
         <div class="photo-item">
-          <ResponsiveImage 
-            src={photo.src} 
-            alt={photo.alt} 
-            class="photo-image" 
+          <ResponsiveImage
+            src={photo.src}
+            alt={photo.alt}
+            class="photo-image"
             loading={index === 0 ? "eager" : "lazy"}
             fetchpriority={index === 0 ? "high" : "auto"}
             sizes="(min-width: 66em) 60vw, 90vw"

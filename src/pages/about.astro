@@ -9,17 +9,96 @@ const skills = await getCollection("skills");
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="about-content">
-    <ResponsiveImage 
-      src={catImage} 
-      alt="About me" 
-      class="about-image" 
-      loading="eager" 
+    <ResponsiveImage
+      src={catImage}
+      alt="Anna Van Ongeval"
+      class="about-image"
+      loading="eager"
       fetchpriority="high"
       sizes="(min-width: 66em) 40rem, (min-width: 44em) 60vw, 90vw"
       width={800}
       height={600}
     />
-    <p>Learn more about me and my creative journey.</p>
+
+    <section class="intro">
+      <h2>Hi, I'm Anna</h2>
+      <p>
+        I'm a 22-year-old digital design & development student at Howest
+        Kortrijk who loves creating things—whether that's a website, a recipe, a
+        photograph, or an illustration. I'm all about exploring different
+        creative outlets and seeing where they take me.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <h2>A Bit About Me</h2>
+      <p>
+        My path has been pretty varied, and honestly, that's what makes it
+        interesting. I've always loved cooking and exploring new recipes—that
+        passion didn't come from my studies in food and nutrition at Odisee
+        Ghent. During that time, I realized something was missing: the creative
+        aspect. I'm not someone who can just study things for the sake of
+        studying them. It got really tough, so I made the decision to stop and
+        go abroad for half a year to study French. That's where I found my spark
+        again—I rediscovered my love for noticing the little things and creating
+        something meaningful. Now I'm studying digital design at Howest, and it
+        finally feels right.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <h2>What's in My Portfolio</h2>
+      <ul class="portfolio-list">
+        <li>
+          <strong>Web & Graphic Design:</strong> I want to be a minimalist, but I'm
+          definitely a maximalist—my designs are full of personality and detail
+        </li>
+        <li>
+          <strong>Recipes:</strong> Dishes I've developed that are as much about
+          the process as they are about the final result
+        </li>
+        <li>
+          <strong>Photography:</strong> Moments I've captured that tell a story or
+          just feel right
+        </li>
+        <li>
+          <strong>Illustration:</strong> Some of my favorite pieces that show what
+          I'm drawn to artistically
+        </li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h2>How I Work</h2>
+      <p>
+        I think the best ideas come from mixing different perspectives and not
+        being afraid to try something new. My background is all over the
+        place—I've worked in hospitality, logistics, and even L&D
+        development—and each experience taught me something valuable about
+        connecting with people and solving problems creatively.
+      </p>
+    </section>
+
+    <section class="about-section contact">
+      <h2>Let's Chat</h2>
+      <p>
+        Always up for new projects and collaborations! Whether you need help
+        with design, want to talk recipes, or are looking for someone to
+        photograph your project, feel free to reach out.
+      </p>
+      <ul class="contact-list">
+        <li>
+          <strong>Email:</strong>
+          <a href="mailto:anna.van.ongeval@outlook.be"
+            >anna.van.ongeval@outlook.be</a>
+        </li>
+        <li>
+          <strong>Phone:</strong>
+          <a href="tel:+32478636936">+32 478 63 69 36</a>
+        </li>
+        <li><strong>Location:</strong> Aalst, Belgium</li>
+      </ul>
+    </section>
 
     <h2>Skills & Tools</h2>
     <ul class="skills-grid">
@@ -53,10 +132,65 @@ const skills = await getCollection("skills");
     margin: 2rem 0;
   }
 
-  p {
-    font-size: clamp(1.65rem, 2.75vw, 1.65rem);
+  .intro {
     text-align: center;
-    line-height: 1.4;
+    margin-bottom: 2rem;
+  }
+
+  .intro h2 {
+    margin-top: 0;
+  }
+
+  .about-section {
+    max-width: 50rem;
+    margin: 3rem auto;
+  }
+
+  .portfolio-list {
+    list-style: none;
+    padding: 0;
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    line-height: 1.6;
+  }
+
+  .portfolio-list li {
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    line-height: 1.8;
+  }
+
+  .contact-list li {
+    margin: 0.75rem 0;
+  }
+
+  .contact-list a {
+    color: rgb(166, 1, 59);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .contact-list a:hover {
+    opacity: 0.7;
+  }
+
+  html.dark .contact-list a {
+    color: #f9f6f1;
+  }
+
+  p {
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  .intro p {
+    text-align: center;
   }
 
   h2 {
