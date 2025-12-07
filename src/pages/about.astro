@@ -1,0 +1,366 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import headshotImage from "../assets/images/Headshot.jpeg";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
+const pageTitle = "About";
+const allSkills = await getCollection("skills");
+
+// Group skills by category
+const groupedSkills = allSkills.reduce(
+  (acc, skill) => {
+    const category = skill.data.category;
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(skill);
+    return acc;
+  },
+  {} as Record<string, typeof allSkills>
+);
+
+// Define category order
+const categoryOrder = [
+  "Design & Development",
+  "Photography & Creative",
+  "Tools & Workflow",
+  "Languages",
+];
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="hero-section">
+    <div class="image-wrapper">
+      <ResponsiveImage
+        src={headshotImage}
+        alt="Anna Van Ongeval"
+        class="about-image"
+        loading="eager"
+        fetchpriority="high"
+        sizes="(min-width: 66em) 17.5rem, (min-width: 44em) 25vw, 45vw"
+        width={420}
+        height={560}
+      />
+    </div>
+
+    <section class="intro">
+      <h2>Hi, I'm Anna</h2>
+      <p>
+        I'm a 22-year-old digital design & development student at Howest
+        Kortrijk who loves creating things. Whether that's a website, a recipe,
+        a photo, or an illustration. I'm all about exploring different creative
+        outlets and seeing where they take me.
+      </p>
+    </section>
+  </div>
+
+  <div class="about-content">
+    <section class="about-section">
+      <h2>A Bit About Me</h2>
+      <p>
+        My path has been pretty varied, and honestly, that's what makes it
+        interesting. I've always loved cooking and exploring new recipes. That
+        passion didn't come from my studies in food and nutrition at Odisee
+        Ghent. During that time, I realized something was missing: the creative
+        aspect. I'm not someone who can just study things for the sake of
+        studying them. It got really tough, so I made the decision to stop and
+        go abroad for half a year to study French. That's where I found my spark
+        again. I rediscovered my love for noticing the little things and
+        creating something meaningful. Now I'm studying digital design at
+        Howest, and it finally feels right.
+      </p>
+    </section>
+
+    <section class="about-section">
+      <h2>What's in My Portfolio</h2>
+      <ul class="portfolio-list">
+        <li>
+          <strong>Web & Graphic Design:</strong> I want to be a minimalist, but I'm
+          definitely a maximalist. My designs are full of personality and detail
+        </li>
+        <li>
+          <strong>Recipes:</strong> Delish food ideas I've tried and loved
+        </li>
+        <li>
+          <strong>Photography:</strong> Moments I've captured that I love
+        </li>
+        <li>
+          <strong>Illustration:</strong> Some of my own favorite pieces I made
+        </li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h2>How I Work</h2>
+      <p>
+        I think the best ideas come from mixing different perspectives and not
+        being afraid to try something new. My work background is all over the
+        place. I've worked in hospitality, logistics, and even L&D
+        development—and each experience taught me something valuable about
+        connecting with people and solving problems creatively.
+      </p>
+    </section>
+
+    <h2>Skills & Tools</h2>
+    <div class="skills-container">
+      {
+        categoryOrder.map((category) => (
+          <section class="skill-category-section">
+            <h3 class="category-title">{category}</h3>
+            <ul class="skills-list">
+              {groupedSkills[category]?.map((skill) => (
+                <li class="skill-item">
+                  <div class="skill-header">
+                    <strong class="skill-name">{skill.data.name}</strong>
+                    <span class="skill-level">{skill.data.level}</span>
+                  </div>
+                  {skill.data.subcategory && (
+                    <p class="skill-subcategory">{skill.data.subcategory}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <section class="about-section contact">
+      <h2>Let's Chat</h2>
+      <p>
+        Always up for new projects and collaborations! Whether you need help
+        with design, want to talk recipes, or are looking for someone to
+        photograph your project, feel free to reach out.
+      </p>
+      <ul class="contact-list">
+        <li>
+          <strong>Email:</strong>
+          <a href="mailto:anna.van.ongeval@outlook.be"
+            >anna.van.ongeval@outlook.be</a
+          >
+        </li>
+        <li>
+          <strong>Phone:</strong>
+          <a href="tel:+32478636936">+32 478 63 69 36</a>
+        </li>
+        <li><strong>Location:</strong> Aalst, Belgium</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .image-wrapper {
+    width: 17.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-image :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .intro h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  .intro p {
+    line-height: 1.6;
+    margin-top: 1rem;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  @media (max-width: 64rem) {
+    .hero-section {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      max-width: 17.5rem;
+      margin: 0 auto;
+    }
+  }
+
+  .about-section {
+    margin: 2rem 0;
+  }
+
+  .portfolio-list {
+    list-style: none;
+    padding: 0;
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    line-height: 1.6;
+  }
+
+  .portfolio-list li {
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    line-height: 1.8;
+  }
+
+  .contact-list li {
+    margin: 0.75rem 0;
+  }
+
+  .contact-list a {
+    color: rgb(166, 1, 59);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .contact-list a:hover {
+    opacity: 0.7;
+  }
+
+  html.dark .contact-list a {
+    color: #f9f6f1;
+  }
+
+  p {
+    font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-family: "Aesthetic";
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-align: left;
+    margin: 2rem 0 1rem 0;
+  }
+
+  .skills-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 64rem) {
+    .skills-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .skill-category-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+
+  html.dark .skill-category-section {
+    background-color: rgb(28, 0, 10);
+    border: 1px solid rgba(249, 246, 241, 0.1);
+  }
+
+  .category-title {
+    font-family: "Aesthetic";
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    color: rgb(166, 1, 59);
+    margin: 0 0 1.5rem 0;
+    text-align: left;
+  }
+
+  html.dark .category-title {
+    color: #f9f6f1;
+  }
+
+  .skills-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .skill-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(166, 1, 59, 0.1);
+  }
+
+  .skill-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .skill-item:first-child {
+    padding-top: 0;
+  }
+
+  html.dark .skill-item {
+    border-bottom-color: rgba(249, 246, 241, 0.1);
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .skill-name {
+    font-size: clamp(1.3rem, 2vw, 1.5rem);
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .skill-name {
+    color: #f9f6f1;
+  }
+
+  .skill-level {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: rgb(166, 1, 59);
+    font-weight: 600;
+  }
+
+  html.dark .skill-level {
+    color: #f9f6f1;
+    opacity: 0.8;
+  }
+
+  .skill-subcategory {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: #666;
+    margin: 0.25rem 0 0 0;
+    text-align: left;
+  }
+
+  html.dark .skill-subcategory {
+    color: rgba(249, 246, 241, 0.7);
+  }
+</style>

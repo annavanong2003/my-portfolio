@@ -2,7 +2,81 @@
 
 ---
 
-<div id="main-menu" class="nav-links">
+<div id="main-menu" class="nav-links" hidden>
   <a href={`${import.meta.env.BASE_URL}`}>Home</a>
-  <a href={`${import.meta.env.BASE_URL}work`}>My work</a>
+  <a href={`${import.meta.env.BASE_URL}work`}>Work</a>
+  <a href={`${import.meta.env.BASE_URL}about`}>About</a>
+  <a href={`${import.meta.env.BASE_URL}playground`}>Playground</a>
 </div>
+
+<style>
+  .nav-links {
+    width: 100%;
+    display: none;
+    margin: 0;
+    border-radius: 2rem;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .nav-links a {
+    display: block;
+    text-align: center;
+    padding: 0.9rem 1.2rem;
+    text-decoration: none;
+    font-family: "Aesthetic";
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: rgb(166, 1, 59);
+    border-radius: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background-color: rgb(166, 1, 59);
+    color: #f9f6f1;
+    border-radius: 2rem;
+  }
+
+  :global(:has(.menu[aria-expanded="true"])) .nav-links {
+    display: flex;
+  }
+
+  /* Show navigation on desktop */
+  @media screen and (min-width: 40.625rem) {
+    .nav-links[hidden] {
+      display: flex !important;
+    }
+  }
+
+  html.dark .nav-links a:hover,
+  html.dark .nav-links a:focus {
+    color: rgb(166, 1, 59);
+    background-color: #f9f6f1;
+    border-radius: 2rem;
+  }
+
+  html.dark .nav-links a {
+    color: #f9f6f1;
+    border-radius: 2rem;
+  }
+
+  @media screen and (min-width: 40.625rem) {
+    .nav-links {
+      margin-left: 5em;
+      display: flex;
+      flex-direction: row;
+      position: static;
+      width: auto;
+      background: none;
+      margin-top: 0;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 0;
+    }
+  }
+</style>

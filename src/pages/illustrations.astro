@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import catImage from "../assets/images/Creaweek.png";
+import { Image } from "astro:assets";
+
+const pageTitle = "Illustrations";
+const illustrations = await getCollection("illustrations");
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
+    Here you can find my favourite illustrations that I made
+  </p>
+  <ul class="illustrations-grid">
+    {
+      illustrations.map((illustration) => (
+        <li class="illustration-card">
+          <a
+            href={`${import.meta.env.BASE_URL}illustrations/${illustration.id}`}
+            class="illustration-link"
+          >
+            <Image
+              src={catImage}
+              alt={illustration.data.title}
+              class="illustration-image"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="illustration-title">{illustration.data.title}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="navigation-buttons">
+    <a href={`${import.meta.env.BASE_URL}recipes`} class="nav-link">← Recipes</a
+    >
+    <a href={`${import.meta.env.BASE_URL}photography`} class="nav-link"
+      >Photography →</a
+    >
+  </div>
+</BaseLayout>
+
+<style>
+  .illustrations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 40.625rem) {
+    .illustrations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .illustration-card {
+    list-style: none;
+  }
+
+  .illustration-link {
+    font-family: "Aesthetic";
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: rgb(166, 1, 59);
+    border-radius: 1rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    overflow: hidden;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .illustration-image {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+
+  .illustration-title {
+    display: block;
+    padding: 1.2rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+  }
+
+  .illustration-link:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  html.dark .illustration-link {
+    background-color: rgb(28, 0, 10);
+    color: #f9f6f1;
+  }
+
+  html.dark .illustration-title {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .illustration-link:hover {
+    box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.1);
+  }
+
+  .navigation-buttons {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    display: inline-block;
+    font-family: "Aesthetic";
+    font-size: 1.2rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.6rem 0.9rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .nav-link:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  html.dark .nav-link {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .nav-link:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+</style>

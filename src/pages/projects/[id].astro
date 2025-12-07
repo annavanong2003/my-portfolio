@@ -1,0 +1,269 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import catImage from "../../assets/images/Creaweek.png";
+import scrapforestImage from "../../assets/images/projects/scrapforest.png";
+import thrivecampaignImage from "../../assets/images/projects/thrivecampaign.png";
+import portrait1 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result1.png";
+import portrait2 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result2.png";
+import portrait3 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result3.png";
+import portrait4 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result4.png";
+import portrait5 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result5.png";
+import portrait6 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result6.png";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { id: project.id.toString() },
+    props: {
+      project,
+    },
+  }));
+}
+
+const { id } = Astro.params;
+const { project } = Astro.props;
+const { Content } = await render(project);
+const projectImage =
+  id === "scrapforest"
+    ? scrapforestImage
+    : id === "thrive-campaign"
+      ? thrivecampaignImage
+      : catImage;
+---
+
+<BaseLayout pageTitle="">
+  <a href={`${import.meta.env.BASE_URL}projects`} class="back-button"
+    >← Back to Projects</a
+  >
+  <h1 class="post-title">{project.data.title}</h1>
+  <p class="description">{project.data.description}</p>
+  <div class="markdown-content">
+    <Content />
+  </div>
+
+  {
+    id === "generative-masks" ? (
+      <div class="sketch-container">
+        <iframe
+          src={`${import.meta.env.BASE_URL}sketches/index.html`}
+          title="Generative Masks Live Demo"
+          class="sketch-iframe"
+        />
+        <p class="sketch-instruction">
+          Click on the canvas to generate a new mask!
+        </p>
+      </div>
+    ) : id === "portrait-experimentation" ? (
+      <div class="gallery">
+        <Image
+          src={portrait1}
+          alt="Portrait 1"
+          class="gallery-image"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+        <Image
+          src={portrait2}
+          alt="Portrait 2"
+          class="gallery-image"
+          loading="lazy"
+          decoding="async"
+        />
+        <Image
+          src={portrait3}
+          alt="Portrait 3"
+          class="gallery-image"
+          loading="lazy"
+          decoding="async"
+        />
+        <Image
+          src={portrait4}
+          alt="Portrait 4"
+          class="gallery-image"
+          loading="lazy"
+          decoding="async"
+        />
+        <Image
+          src={portrait5}
+          alt="Portrait 5"
+          class="gallery-image"
+          loading="lazy"
+          decoding="async"
+        />
+        <Image
+          src={portrait6}
+          alt="Portrait 6"
+          class="gallery-image"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ) : (
+      <div class="gallery">
+        <Image
+          src={projectImage}
+          alt={project.data.title}
+          class="gallery-image landscape"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+    )
+  }
+</BaseLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll('a[href^="http"]');
+    links.forEach((link) => {
+      if (!link.classList.contains("back-button")) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    });
+  });
+</script>
+
+<style>
+  .back-button {
+    display: inline-block;
+    font-family: "Aesthetic";
+    font-size: 1.5rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.7rem 1rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .back-button:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  html.dark .back-button {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .back-button:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+
+  .post-title {
+    font-family: "Aesthetic" !important;
+    font-size: clamp(4rem, 8vw, 8rem) !important;
+    margin: 1rem 0 !important;
+    line-height: 0.9 !important;
+  }
+
+  .description {
+    font-size: clamp(1.65rem, 2.75vw, 1.65rem);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+  }
+
+  :global(p) {
+    line-height: 1.3 !important;
+  }
+
+  .markdown-content :global(a) {
+    color: rgb(166, 1, 59);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 0.125rem solid rgb(166, 1, 59);
+    transition: opacity 0.15s ease;
+  }
+
+  .markdown-content :global(a:hover) {
+    opacity: 0.7;
+  }
+
+  html.dark .markdown-content :global(a) {
+    color: #f9f6f1;
+    border-bottom-color: #f9f6f1;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.125rem solid rgb(166, 1, 59);
+  }
+
+  @media (max-width: 40.625rem) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+    border-radius: 1rem !important;
+    overflow: hidden;
+  }
+
+  .gallery-image.landscape {
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    height: auto;
+    border-radius: 1rem !important;
+    background-color: transparent;
+  }
+
+  html.dark .gallery {
+    border-top-color: #f9f6f1;
+  }
+
+  .sketch-container {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 0.125rem solid rgb(166, 1, 59);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sketch-iframe {
+    width: 100%;
+    max-width: 450px;
+    height: 800px;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  .sketch-instruction {
+    font-size: 1.25rem;
+    color: rgb(166, 1, 59);
+    font-style: italic;
+    text-align: center;
+  }
+
+  html.dark .sketch-container {
+    border-top-color: #f9f6f1;
+  }
+
+  html.dark .sketch-instruction {
+    color: #f9f6f1;
+  }
+</style>

@@ -1,0 +1,245 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import catImage from "../../assets/images/Creaweek.png";
+import autumnSaladImage from "../../assets/images/recipes/Autumn salad.png";
+import chickenImage from "../../assets/images/recipes/chicken.png";
+import cookiesImage from "../../assets/images/recipes/chocolatechicpcookies.png";
+import bananaImage from "../../assets/images/recipes/Banana.png";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const recipes = await getCollection("recipes");
+
+  return recipes.map((recipe) => ({
+    params: { id: recipe.id.toString() },
+    props: {
+      recipe,
+    },
+  }));
+}
+
+const { id } = Astro.params;
+const { recipe } = Astro.props;
+const { Content } = await render(recipe);
+
+// Split content into sections - get raw markdown
+const body = recipe.body || "";
+const ingredientsMatch = body.match(
+  /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
+);
+const instructionsMatch = body.match(
+  /## Instructions\n([\s\S]*?)(?=## Tips|## Nutritional Facts|$)/
+);
+const tipsMatch = body.match(/## Tips\n([\s\S]*?)(?=## Nutritional Facts|$)/);
+const nutritionalFactsMatch = body.match(/## Nutritional Facts\n([\s\S]*?)$/);
+
+// Convert markdown lists to HTML
+function markdownToHtml(markdown: string) {
+  return markdown
+    .split("\n")
+    .map((line) => {
+      if (line.match(/^- /)) {
+        return `<li>${line.substring(2)}</li>`;
+      } else if (line.match(/^\d+\. /)) {
+        return `<li>${line.replace(/^\d+\. /, "")}</li>`;
+      }
+      return line;
+    })
+    .join("\n");
+}
+
+const ingredientsHtml = ingredientsMatch
+  ? `<ul>${markdownToHtml(ingredientsMatch[1].trim())}</ul>`
+  : "";
+const instructionsHtml = instructionsMatch
+  ? `<ol>${markdownToHtml(instructionsMatch[1].trim())}</ol>`
+  : "";
+const tipsHtml = tipsMatch
+  ? `<ul>${markdownToHtml(tipsMatch[1].trim())}</ul>`
+  : "";
+const nutritionalFactsHtml = nutritionalFactsMatch
+  ? `<ul>${markdownToHtml(nutritionalFactsMatch[1].trim())}</ul>`
+  : "";
+---
+
+<BaseLayout pageTitle="">
+  <a href={`${import.meta.env.BASE_URL}recipes`} class="back-button"
+    >← Back to Recipes</a
+  >
+  <h1 class="post-title">{recipe.data.title}</h1>
+  <p class="description">{recipe.data.description}</p>
+
+  <div class="content-wrapper">
+    <Image
+      src={id === "autumn-salad"
+        ? autumnSaladImage
+        : id === "cashew-chicken"
+          ? chickenImage
+          : id === "chocolate-chip-cookies"
+            ? cookiesImage
+            : id === "banana-bread"
+              ? bananaImage
+              : catImage}
+      alt={recipe.data.title}
+      class="recipe-image"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <div class="text-content">
+      <h2>Ingredients</h2>
+      <div set:html={ingredientsHtml} />
+    </div>
+  </div>
+
+  <div class="instructions-section">
+    <h2>Instructions</h2>
+    <div set:html={instructionsHtml} />
+  </div>
+
+  {
+    tipsHtml && (
+      <div class="tips-section">
+        <h2>Tips</h2>
+        <div set:html={tipsHtml} />
+      </div>
+    )
+  }
+
+  {
+    nutritionalFactsHtml && (
+      <div class="nutritional-facts-section">
+        <h2>Nutritional Facts</h2>
+        <div set:html={nutritionalFactsHtml} />
+      </div>
+    )
+  }
+</BaseLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll('a[href^="http"]');
+    links.forEach((link) => {
+      if (!link.classList.contains("back-button")) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
+      }
+    });
+  });
+</script>
+
+<style>
+  .back-button {
+    display: inline-block;
+    font-family: "Aesthetic";
+    font-size: 1.5rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.7rem 1rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .back-button:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  html.dark .back-button {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .back-button:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+
+  .post-title {
+    font-family: "Aesthetic" !important;
+    font-size: clamp(2rem, 4vw, 4rem) !important;
+    margin: 1rem 0 !important;
+    line-height: 0.9 !important;
+    white-space: nowrap;
+  }
+
+  .description {
+    font-size: clamp(1.65rem, 2.75vw, 1.65rem);
+    margin-bottom: 2rem;
+    line-height: 1.4;
+  }
+
+  :global(p) {
+    line-height: 1.3 !important;
+  }
+
+  .instructions-section :global(a) {
+    color: rgb(166, 1, 59);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 0.125rem solid rgb(166, 1, 59);
+    transition: opacity 0.15s ease;
+  }
+
+  .instructions-section :global(a:hover) {
+    opacity: 0.7;
+  }
+
+  html.dark .instructions-section :global(a) {
+    color: #f9f6f1;
+    border-bottom-color: #f9f6f1;
+  }
+
+  .content-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (max-width: 40.625rem) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+  }
+
+  .recipe-image {
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    border-radius: 1rem;
+    flex-shrink: 0;
+  }
+
+  .text-content {
+    flex: 1;
+  }
+
+  .instructions-section {
+    margin-top: 3rem;
+  }
+
+  .tips-section {
+    margin-top: 3rem;
+  }
+
+  .nutritional-facts-section {
+    margin-top: 3rem;
+  }
+
+  .text-content h2,
+  .instructions-section h2,
+  .tips-section h2,
+  .nutritional-facts-section h2 {
+    font-family: "Aesthetic";
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+</style>

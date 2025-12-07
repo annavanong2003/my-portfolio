@@ -1,35 +1,263 @@
 ---
-import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const { pageTitle } = Astro.props;
+const {
+  pageTitle,
+  description = "Portfolio showcasing creative projects, illustrations, and recipes by Anna Van Ong",
+  isHomepage = false,
+} = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL("/favicon.png", Astro.site);
 ---
 
-<html lang="en" class="transition-colors duration-300">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImage} />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href={`${import.meta.env.BASE_URL}favicon.png`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href={`${import.meta.env.BASE_URL}favicon.png`}
+    />
+    <link
+      rel="apple-touch-icon"
+      href={`${import.meta.env.BASE_URL}favicon.png`}
+    />
     <title>{pageTitle}</title>
 
-	<script>
-		(function () {
-		  const stored = localStorage.getItem("theme");
-		  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-		  const isDark = stored === "dark" || (!stored && prefersDark);
-	
-		  if (isDark) {
-			document.documentElement.classList.add("dark");
-		  } else {
-			document.documentElement.classList.remove("dark");
-		  }
-		})();
-	  </script>
-  </head>
-  <body class="min-h-screen">
+    <script>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isDark = stored === "dark" || (!stored && prefersDark);
 
-	<div class="theme-toggle" role="group" aria-label="Theme switch">
+        if (isDark) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "Aesthetic";
+        src: url("/src/assets/fonts/Aesthetic-Regular.ttf") format("truetype");
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "ElmsSans";
+        src: url("/src/assets/fonts/ElmsSans-VariableFont_wght.ttf")
+          format("truetype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "DarkerGrotesque";
+        src: url("/src/assets/fonts/DarkerGrotesque-VariableFont_wght.ttf")
+          format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      html {
+        background-color: #f9f6f1;
+        font-family: "DarkerGrotesque", sans-serif;
+        transition: none !important;
+      }
+
+      body {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 80ch;
+        padding: 1rem;
+        line-height: 1.3;
+        transition: inherit;
+        min-height: 100vh;
+      }
+
+      * {
+        box-sizing: border-box;
+        transition:
+          color 0.25s ease,
+          background-color 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      h1 {
+        margin: 1rem 0;
+        font-size: clamp(3rem, 6vw, 6rem);
+        font-family: "Aesthetic";
+        text-transform: uppercase;
+      }
+
+      h1.homepage-title {
+        font-size: clamp(7rem, 14vw, 14rem);
+        font-weight: bold;
+        text-align: center;
+        margin: 10rem auto 1rem auto;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+      }
+
+      h2 {
+        font-size: clamp(5rem, 8vw, 5rem);
+        font-family: "Aesthetic";
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        font-size: clamp(1.5rem, 2.5vw, 1.5rem);
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 0.05rem;
+        height: 0.05rem;
+        padding: 0;
+        margin: -0.05rem;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .switch {
+        display: block;
+        width: 3rem;
+        height: 1.5rem;
+        background: #d0d0d0;
+        border-radius: 2rem;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: inset 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
+      }
+
+      .switch::after {
+        content: "";
+        width: 1.25rem;
+        height: 1.25rem;
+        background: white;
+        border-radius: 2rem;
+        position: absolute;
+        top: 0.125rem;
+        left: 0.125rem;
+        transition: transform 0.3s ease;
+        box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.2);
+      }
+
+      #toggle-switch:checked + .switch {
+        background: #555;
+      }
+
+      #toggle-switch:checked + .switch::after {
+        transform: translateX(1.5rem);
+      }
+
+      #toggle-switch:focus-visible + .switch {
+        outline: 0.125rem solid rgb(166, 1, 59);
+        outline-offset: 0.125rem;
+      }
+
+      .switch::before {
+        content: "🌙";
+        position: absolute;
+        top: 50%;
+        left: 1.75rem;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+
+      #toggle-switch:checked + .switch::before {
+        content: "☀️";
+        left: 0.25rem;
+      }
+
+      html.dark {
+        background-color: rgb(166, 1, 59);
+        color: #f9f6f1;
+      }
+
+      /* Skip to content link */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: rgb(166, 1, 59);
+        color: white;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        font-weight: 600;
+        z-index: 100;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
+      @media screen and (min-width: 39.75rem) {
+        body {
+          max-width: 85ch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="theme-toggle" role="group" aria-label="Theme switch">
       <input
         type="checkbox"
         id="toggle-switch"
@@ -40,51 +268,58 @@ const { pageTitle } = Astro.props;
     </div>
 
     <Header />
-    <h1>{pageTitle}</h1>
-    <slot />
+    <h1 class:list={[{ "homepage-title": isHomepage }]}>{pageTitle}</h1>
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
 
     <script>
-		(function () {
-		  const checkbox = document.getElementById("toggle-switch") as HTMLInputElement | null;
-		  const html = document.documentElement;
-	  
-		  const stored = localStorage.getItem("theme");
-		  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-		  const isDark = stored === "dark" || (!stored && prefersDark);
-	  
-		  if (isDark) html.classList.add("dark");
-		  else html.classList.remove("dark");
-	  
-		  document.addEventListener("DOMContentLoaded", () => {
-			if (!checkbox) return;
-	  
-			checkbox.checked = isDark;
-	  
-			checkbox.addEventListener("change", () => {
-			  if (checkbox.checked) {
-				html.classList.add("dark");
-				localStorage.setItem("theme", "dark");
-			  } else {
-				html.classList.remove("dark");
-				localStorage.setItem("theme", "light");
-			  }
-			});
-		  });
-	  
-		  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-			if (!localStorage.getItem("theme")) {
-			  if (e.matches) {
-				html.classList.add("dark");
-				if (checkbox) checkbox.checked = true;
-			  } else {
-				html.classList.remove("dark");
-				if (checkbox) checkbox.checked = false;
-			  }
-			}
-		  });
-		})();
-		
-	  </script>
+      (function () {
+        const checkbox = document.getElementById(
+          "toggle-switch"
+        ) as HTMLInputElement | null;
+        const html = document.documentElement;
+
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const isDark = stored === "dark" || (!stored && prefersDark);
+
+        if (isDark) html.classList.add("dark");
+        else html.classList.remove("dark");
+
+        document.addEventListener("DOMContentLoaded", () => {
+          if (!checkbox) return;
+
+          checkbox.checked = isDark;
+
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+              html.classList.add("dark");
+              localStorage.setItem("theme", "dark");
+            } else {
+              html.classList.remove("dark");
+              localStorage.setItem("theme", "light");
+            }
+          });
+        });
+
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            if (!localStorage.getItem("theme")) {
+              if (e.matches) {
+                html.classList.add("dark");
+                if (checkbox) checkbox.checked = true;
+              } else {
+                html.classList.remove("dark");
+                if (checkbox) checkbox.checked = false;
+              }
+            }
+          });
+      })();
+    </script>
   </body>
 </html>

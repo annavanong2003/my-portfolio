@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ResponsiveImage from "../components/ResponsiveImage.astro";
+
+const pageTitle = "Photography";
+
+// Import your photography images
+import londonImage from "../assets/images/photography/london.jpg";
+import oxfordImage from "../assets/images/photography/oxford.jpg";
+import marseilleImage from "../assets/images/photography/marseille.jpeg";
+import niceImage from "../assets/images/photography/nice.jpeg";
+import tenerifeImage from "../assets/images/photography/tenerife.jpg";
+import blossomImage from "../assets/images/photography/blossom.jpg";
+import flowerImage from "../assets/images/photography/flower.jpeg";
+
+// Add all your photography images to this array
+const photos = [
+  { src: londonImage, alt: "London" },
+  { src: oxfordImage, alt: "Oxford" },
+  { src: marseilleImage, alt: "Marseille" },
+  { src: niceImage, alt: "Nice" },
+  { src: tenerifeImage, alt: "Tenerife" },
+  { src: blossomImage, alt: "Blossom" },
+  { src: flowerImage, alt: "Flower" },
+];
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
+    A collection of moments captured through my lens
+  </p>
+
+  <div class="photo-gallery">
+    {
+      photos.map((photo, index) => (
+        <div class="photo-item">
+          <ResponsiveImage
+            src={photo.src}
+            alt={photo.alt}
+            class="photo-image"
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : "auto"}
+            sizes="(min-width: 66em) 60vw, 90vw"
+            width={1200}
+            height={800}
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="navigation-buttons">
+    <a href={`${import.meta.env.BASE_URL}recipes`} class="nav-link">← Recipes</a
+    >
+    <a href={`${import.meta.env.BASE_URL}illustrations`} class="nav-link"
+      >Illustrations →</a
+    >
+  </div>
+</BaseLayout>
+
+<style>
+  .photo-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .photo-item {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .photo-item:hover {
+    transform: scale(1.02);
+  }
+
+  .photo-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .navigation-buttons {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    display: inline-block;
+    font-family: "Aesthetic";
+    font-size: 1.2rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.6rem 0.9rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .nav-link:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  html.dark .nav-link {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .nav-link:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+
+  /* Smooth scroll effect */
+  .photo-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .photo-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .photo-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .photo-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .photo-item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .photo-item:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .photo-item:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

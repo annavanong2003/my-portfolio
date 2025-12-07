@@ -3,14 +3,66 @@
 ---
 
 <button aria-expanded="false" aria-controls="main-menu" class="menu">
-    Menu
+  Menu
 </button>
 
-<script>
-    const menu = document.querySelector('.menu');
+<style>
+  .menu {
+    font-family: "Aesthetic";
+    font-size: 2rem;
+    background-color: rgb(166, 1, 59);
+    border: none;
+    color: #f9f6f1;
+    padding: 0.9rem 1.2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
 
-menu?.addEventListener('click', () => {
-    const isExpanded = menu.getAttribute('aria-expanded') === 'true';
-    menu.setAttribute('aria-expanded', `${!isExpanded}`);
-});
+  .menu:hover {
+    opacity: 0.8;
+  }
+
+  html.dark .menu {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    border-radius: 2rem;
+  }
+
+  @media screen and (min-width: 40.625rem) {
+    .menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const menu = document.querySelector(".menu");
+  const nav = document.getElementById("main-menu");
+
+  menu?.addEventListener("click", () => {
+    const isExpanded = menu.getAttribute("aria-expanded") === "true";
+    const newState = !isExpanded;
+
+    menu.setAttribute("aria-expanded", `${newState}`);
+
+    if (nav) {
+      nav.hidden = !newState;
+
+      // Focus management
+      if (newState) {
+        const firstLink = nav.querySelector("a");
+        firstLink?.focus();
+      }
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu?.getAttribute("aria-expanded") === "true") {
+      menu.setAttribute("aria-expanded", "false");
+      if (nav) nav.hidden = true;
+      (menu as HTMLElement).focus();
+    }
+  });
 </script>

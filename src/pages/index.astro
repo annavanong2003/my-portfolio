@@ -1,9 +1,61 @@
 ---
-import Layout from '../layouts/BaseLayout.astro';
+import Layout from "../layouts/BaseLayout.astro";
 const pageTitle = "Portfolio";
 ---
-<Layout pageTitle={pageTitle}>
-  <p>Hello! I’m Anna. </br>
-    This portfolio gathers my latest projects </br> alongside my favourite illustrations. </br>
-    Take a look around and enjoy the mix.</p>
+
+<Layout pageTitle={pageTitle} isHomepage={true}>
+  <div class="intro-text">
+    <p>
+      Hello! I'm Anna. <br />
+      Welcome to my portfolio! <br />
+      Here, you'll find a curated selection of my projects, illustrations, and recipes
+      that showcase my creativity and skills.
+    </p>
+  </div>
 </Layout>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (!prefersReducedMotion) {
+    // Animate the title when page loads
+    gsap.from("h1", {
+      duration: 1.5,
+      y: -50,
+      opacity: 0,
+      ease: "power3.out",
+    });
+
+    // Animate the intro text
+    gsap.from(".intro-text", {
+      duration: 1.5,
+      y: 30,
+      opacity: 0,
+      delay: 0.3,
+      ease: "power3.out",
+    });
+
+    // Animate navigation links
+    gsap.from(".nav-links a", {
+      duration: 0.8,
+      y: 20,
+      opacity: 0,
+      stagger: 0.1,
+      delay: 0.8,
+      ease: "power2.out",
+    });
+  }
+</script>
+
+<style>
+  p {
+    font-size: clamp(1.65rem, 2.75vw, 1.65rem);
+    line-height: 1.4;
+    text-align: center;
+  }
+</style>

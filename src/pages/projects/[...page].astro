@@ -1,0 +1,227 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import catImage from "../../assets/images/Creaweek.png";
+import scrapforestImage from "../../assets/images/projects/scrapforest.png";
+import thrivecampaignImage from "../../assets/images/projects/thrivecampaign.png";
+import maskImage from "../../assets/images/projects/mask.png";
+import portrait1 from "../../assets/images/projects/1DEV_AnnaVanOngeval_result1.png";
+import ResponsiveImage from "../../components/ResponsiveImage.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const projects = await getCollection("projects");
+  return paginate(projects, { pageSize: 25 });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  page: Page<CollectionEntry<"projects">>;
+}
+
+const { page } = Astro.props;
+const pageTitle = "Projects";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
+    Here you can find my previous projects I worked on
+  </p>
+  <ul class="projects-grid">
+    {
+      page.data.map((project) => (
+        <li class="project-card">
+          <a
+            href={`${import.meta.env.BASE_URL}projects/${project.id}`}
+            class="project-link"
+          >
+            <div class="project-image-wrapper">
+              <ResponsiveImage
+                src={
+                  project.id === "scrapforest"
+                    ? scrapforestImage
+                    : project.id === "thrive-campaign"
+                      ? thrivecampaignImage
+                      : project.id === "generative-masks"
+                        ? maskImage
+                        : project.id === "portrait-experimentation"
+                          ? portrait1
+                          : catImage
+                }
+                alt={project.data.title}
+                class="project-image"
+                loading="lazy"
+                sizes="(min-width: 66em) 25vw, (min-width: 44em) 33vw, 50vw"
+                width={800}
+                height={600}
+              />
+            </div>
+            <span class="project-title">{project.data.title}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    page.lastPage > 1 && (
+      <nav class="pagination" aria-label="Pagination">
+        {page.url.prev && (
+          <a
+            href={page.url.prev}
+            class="pagination-link"
+            aria-label="Go to previous page"
+          >
+            ← Previous
+          </a>
+        )}
+        <span class="pagination-info" aria-current="page">
+          Page {page.currentPage} of {page.lastPage}
+        </span>
+        {page.url.next && (
+          <a
+            href={page.url.next}
+            class="pagination-link"
+            aria-label="Go to next page"
+          >
+            Next →
+          </a>
+        )}
+      </nav>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 40.625rem) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .project-card {
+    list-style: none;
+  }
+
+  .project-link {
+    font-family: "Aesthetic";
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    color: rgb(166, 1, 59);
+    border-radius: 1rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    overflow: hidden;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .project-image-wrapper {
+    width: 100%;
+    height: 15rem;
+    overflow: hidden;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-image :global(picture) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .project-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    display: block;
+  }
+
+  .project-title {
+    display: block;
+    padding: 1.2rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+  }
+
+  .project-link:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  html.dark .project-link {
+    background-color: rgb(28, 0, 10);
+    color: #f9f6f1;
+  }
+
+  html.dark .project-title {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .project-link:hover {
+    box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.1);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .pagination-link {
+    display: inline-block;
+    font-family: "Aesthetic";
+    font-size: 1.2rem;
+    background-color: rgb(166, 1, 59);
+    color: white;
+    padding: 0.6rem 0.9rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .pagination-link:hover {
+    transform: translateY(-0.2rem);
+    opacity: 0.8;
+  }
+
+  .pagination-info {
+    font-family: "DarkerGrotesque";
+    font-size: 1.2rem;
+  }
+
+  html.dark .pagination-link {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+  }
+
+  html.dark .pagination-link:hover {
+    background-color: #f9f6f1;
+    color: rgb(28, 0, 10);
+    opacity: 0.8;
+  }
+</style>

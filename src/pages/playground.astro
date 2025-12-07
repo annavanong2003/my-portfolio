@@ -1,23 +1,34 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "My work";
+const pageTitle = "Playground";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <p style="font-size: clamp(1.65rem, 2.75vw, 1.65rem); line-height: 1.4;">
-    Here you can find my previous projects
+    A space for experiments, sketches, and creative explorations.
   </p>
-  <ul class="work-grid">
-    <li class="work-card">
-      <a href={`${import.meta.env.BASE_URL}projects`} class="work-link"
-        >Projects</a
+  <ul class="playground-grid">
+    <li class="playground-card">
+      <a href={`${import.meta.env.BASE_URL}recipes`} class="playground-link"
+        >Recipes</a
+      >
+    </li>
+    <li class="playground-card">
+      <a
+        href={`${import.meta.env.BASE_URL}illustrations`}
+        class="playground-link">Illustrations</a
+      >
+    </li>
+    <li class="playground-card">
+      <a href={`${import.meta.env.BASE_URL}photography`} class="playground-link"
+        >Photography</a
       >
     </li>
   </ul>
 </BaseLayout>
 
 <style>
-  .work-grid {
+  .playground-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
     gap: 1.5rem;
@@ -26,11 +37,11 @@ const pageTitle = "My work";
     margin-top: 2rem;
   }
 
-  .work-card {
+  .playground-card {
     list-style: none;
   }
 
-  .work-link {
+  .playground-link {
     font-family: "Aesthetic";
     font-size: 2rem;
     display: block;
@@ -46,17 +57,17 @@ const pageTitle = "My work";
       opacity 0.15s ease;
   }
 
-  .work-link:hover {
+  .playground-link:hover {
     transform: translateY(-0.2rem);
     opacity: 0.8;
   }
 
-  html.dark .work-link {
+  html.dark .playground-link {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
   }
 
-  html.dark .work-link:hover {
+  html.dark .playground-link:hover {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
     opacity: 0.8;
