@@ -45,9 +45,12 @@ const recipes = await getCollection("recipes");
       ))
     }
   </ul>
-  <div class="navigation-button">
-    <a href={`${import.meta.env.BASE_URL}illustrations`} class="next-link"
-      >Let's check out the illustrations →</a
+  <div class="navigation-buttons">
+    <a href={`${import.meta.env.BASE_URL}illustrations`} class="nav-link"
+      >← Illustrations</a
+    >
+    <a href={`${import.meta.env.BASE_URL}photography`} class="nav-link"
+      >Photography →</a
     >
   </div>
 </BaseLayout>
@@ -122,12 +125,15 @@ const recipes = await getCollection("recipes");
     box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.1);
   }
 
-  .navigation-button {
+  .navigation-buttons {
     margin-top: 3rem;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
-  .next-link {
+  .nav-link {
     display: inline-block;
     font-family: "Aesthetic";
     font-size: 1.2rem;
@@ -143,17 +149,17 @@ const recipes = await getCollection("recipes");
       opacity 0.15s ease;
   }
 
-  .next-link:hover {
+  .nav-link:hover {
     transform: translateY(-0.2rem);
     opacity: 0.8;
   }
 
-  html.dark .next-link {
+  html.dark .nav-link {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
   }
 
-  html.dark .next-link:hover {
+  html.dark .nav-link:hover {
     background-color: #f9f6f1;
     color: rgb(28, 0, 10);
     opacity: 0.8;
