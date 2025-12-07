@@ -71,12 +71,12 @@ const instructionsHtml = instructionsMatch
 </BaseLayout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const links = document.querySelectorAll('a[href^="http"]');
-    links.forEach(link => {
-      if (!link.classList.contains('back-button')) {
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noopener noreferrer');
+    links.forEach((link) => {
+      if (!link.classList.contains("back-button")) {
+        link.setAttribute("target", "_blank");
+        link.setAttribute("rel", "noopener noreferrer");
       }
     });
   });
