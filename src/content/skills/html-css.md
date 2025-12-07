@@ -1,8 +1,6 @@
 ---
-name: HTML & CSS
-category: Frontend
-level: Advanced
-icon: 🎨
+name: "HTML & CSS"
+category: "Design & Development"
+subcategory: "Frontend Development"
+level: "Advanced"
 ---
-
-Semantic HTML and modern CSS with responsive design principles.

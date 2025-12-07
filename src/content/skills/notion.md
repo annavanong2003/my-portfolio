@@ -1,6 +1,6 @@
 ---
-name: "Git & GitHub"
+name: "Notion"
 category: "Tools & Workflow"
-subcategory: "Version Control"
+subcategory: "Organization & Planning"
 level: "Intermediate"
 ---

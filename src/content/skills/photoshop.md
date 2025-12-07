@@ -1,6 +1,6 @@
 ---
-name: "JavaScript"
+name: "Adobe Photoshop"
 category: "Design & Development"
-subcategory: "Programming"
+subcategory: "Photo Editing & Design"
 level: "Intermediate"
 ---

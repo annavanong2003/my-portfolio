@@ -1,6 +1,6 @@
 ---
-name: "JavaScript"
+name: "Figma"
 category: "Design & Development"
-subcategory: "Programming"
+subcategory: "Design & Prototyping"
 level: "Intermediate"
 ---

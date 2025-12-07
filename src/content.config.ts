@@ -34,8 +34,8 @@ const skillsCollection = defineCollection({
     z.object({
       name: z.string(),
       category: z.string(),
+      subcategory: z.string(),
       level: z.string(),
-      icon: z.string(),
     }),
 });
 
