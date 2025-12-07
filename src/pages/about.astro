@@ -30,24 +30,26 @@ const categoryOrder = [
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="hero-section">
-    <ResponsiveImage
-      src={headshotImage}
-      alt="Anna Van Ongeval"
-      class="about-image"
-      loading="eager"
-      fetchpriority="high"
-      sizes="(min-width: 66em) 25rem, (min-width: 44em) 35vw, 45vw"
-      width={600}
-      height={800}
-    />
+    <div class="image-wrapper">
+      <ResponsiveImage
+        src={headshotImage}
+        alt="Anna Van Ongeval"
+        class="about-image"
+        loading="eager"
+        fetchpriority="high"
+        sizes="(min-width: 66em) 17.5rem, (min-width: 44em) 25vw, 45vw"
+        width={420}
+        height={560}
+      />
+    </div>
 
     <section class="intro">
       <h2>Hi, I'm Anna</h2>
       <p>
         I'm a 22-year-old digital design & development student at Howest
-        Kortrijk who loves creating things—whether that's a website, a recipe, a
-        photograph, or an illustration. I'm all about exploring different
-        creative outlets and seeing where they take me.
+        Kortrijk who loves creating things. Whether that's a website, a recipe,
+        a photo, or an illustration. I'm all about exploring different creative
+        outlets and seeing where they take me.
       </p>
     </section>
   </div>
@@ -57,15 +59,15 @@ const categoryOrder = [
       <h2>A Bit About Me</h2>
       <p>
         My path has been pretty varied, and honestly, that's what makes it
-        interesting. I've always loved cooking and exploring new recipes—that
+        interesting. I've always loved cooking and exploring new recipes. That
         passion didn't come from my studies in food and nutrition at Odisee
         Ghent. During that time, I realized something was missing: the creative
         aspect. I'm not someone who can just study things for the sake of
         studying them. It got really tough, so I made the decision to stop and
         go abroad for half a year to study French. That's where I found my spark
-        again—I rediscovered my love for noticing the little things and creating
-        something meaningful. Now I'm studying digital design at Howest, and it
-        finally feels right.
+        again. I rediscovered my love for noticing the little things and
+        creating something meaningful. Now I'm studying digital design at
+        Howest, and it finally feels right.
       </p>
     </section>
 
@@ -74,19 +76,16 @@ const categoryOrder = [
       <ul class="portfolio-list">
         <li>
           <strong>Web & Graphic Design:</strong> I want to be a minimalist, but I'm
-          definitely a maximalist—my designs are full of personality and detail
+          definitely a maximalist. My designs are full of personality and detail
         </li>
         <li>
-          <strong>Recipes:</strong> Dishes I've developed that are as much about
-          the process as they are about the final result
+          <strong>Recipes:</strong> Delish food ideas I've tried and loved
         </li>
         <li>
-          <strong>Photography:</strong> Moments I've captured that tell a story or
-          just feel right
+          <strong>Photography:</strong> Moments I've captured that I love
         </li>
         <li>
-          <strong>Illustration:</strong> Some of my favorite pieces that show what
-          I'm drawn to artistically
+          <strong>Illustration:</strong> Some of my own favorite pieces I made
         </li>
       </ul>
     </section>
@@ -95,8 +94,8 @@ const categoryOrder = [
       <h2>How I Work</h2>
       <p>
         I think the best ideas come from mixing different perspectives and not
-        being afraid to try something new. My background is all over the
-        place—I've worked in hospitality, logistics, and even L&D
+        being afraid to try something new. My work background is all over the
+        place. I've worked in hospitality, logistics, and even L&D
         development—and each experience taught me something valuable about
         connecting with people and solving problems creatively.
       </p>
@@ -155,15 +154,25 @@ const categoryOrder = [
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 3rem;
-    align-items: start;
-    margin-bottom: 4rem;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .image-wrapper {
+    width: 17.5rem;
+    border-radius: 1rem;
+    overflow: hidden;
   }
 
   .about-image {
-    width: 25rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .about-image :global(img) {
+    width: 100%;
     height: auto;
     border-radius: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   }
 
   .intro {
@@ -174,7 +183,14 @@ const categoryOrder = [
 
   .intro h2 {
     margin-top: 0;
+    margin-bottom: 0;
     text-align: left;
+    line-height: 1.2;
+  }
+
+  .intro p {
+    line-height: 1.6;
+    margin-top: 1rem;
   }
 
   .about-content {
@@ -187,9 +203,9 @@ const categoryOrder = [
       gap: 2rem;
     }
 
-    .about-image {
+    .image-wrapper {
       width: 100%;
-      max-width: 25rem;
+      max-width: 17.5rem;
       margin: 0 auto;
     }
   }
