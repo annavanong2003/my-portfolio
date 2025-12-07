@@ -24,7 +24,9 @@ const body = recipe.body || "";
 const ingredientsMatch = body.match(
   /## Ingredients\n([\s\S]*?)(?=## Instructions|$)/
 );
-const instructionsMatch = body.match(/## Instructions\n([\s\S]*?)(?=## Tips|$)/);
+const instructionsMatch = body.match(
+  /## Instructions\n([\s\S]*?)(?=## Tips|$)/
+);
 const tipsMatch = body.match(/## Tips\n([\s\S]*?)$/);
 
 // Convert markdown lists to HTML
@@ -73,12 +75,14 @@ const tipsHtml = tipsMatch
     <div set:html={instructionsHtml} />
   </div>
 
-  {tipsHtml && (
-    <div class="tips-section">
-      <h2>Tips</h2>
-      <div set:html={tipsHtml} />
-    </div>
-  )}
+  {
+    tipsHtml && (
+      <div class="tips-section">
+        <h2>Tips</h2>
+        <div set:html={tipsHtml} />
+      </div>
+    )
+  }
 </BaseLayout>
 
 <script>
