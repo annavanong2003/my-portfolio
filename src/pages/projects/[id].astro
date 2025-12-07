@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 import catImage from "../../assets/images/cat.jpg";
 import scrapforestImage from "../../assets/images/scrapforest.png";
+import thrivecampaignImage from "../../assets/images/thrivecampaign.png";
 import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { project } = Astro.props;
 const { Content } = await render(project);
-const projectImage = id === "scrapforest" ? scrapforestImage : catImage;
+const projectImage = id === "scrapforest" ? scrapforestImage : id === "thrive-campaign" ? thrivecampaignImage : catImage;
 ---
 
 <BaseLayout pageTitle="">
