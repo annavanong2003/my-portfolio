@@ -68,7 +68,11 @@ const nutritionalFactsHtml = nutritionalFactsMatch
   <p class="description">{recipe.data.description}</p>
 
   <div class="content-wrapper">
-    <Image src={id === "autumn-salad" ? autumnSaladImage : catImage} alt={recipe.data.title} class="recipe-image" />
+    <Image
+      src={id === "autumn-salad" ? autumnSaladImage : catImage}
+      alt={recipe.data.title}
+      class="recipe-image"
+    />
     <div class="text-content">
       <h2>Ingredients</h2>
       <div set:html={ingredientsHtml} />
