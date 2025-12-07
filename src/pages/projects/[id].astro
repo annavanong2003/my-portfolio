@@ -38,20 +38,28 @@ const projectImage =
     <Content />
   </div>
 
-  {id === "generative-masks" ? (
-    <div class="sketch-container">
-      <iframe 
-        src={`${import.meta.env.BASE_URL}sketches/index.html`}
-        title="Generative Masks Live Demo"
-        class="sketch-iframe"
-      ></iframe>
-      <p class="sketch-instruction">Click on the canvas to generate a new mask!</p>
-    </div>
-  ) : (
-    <div class="gallery">
-      <Image src={projectImage} alt={project.data.title} class="gallery-image" />
-    </div>
-  )}
+  {
+    id === "generative-masks" ? (
+      <div class="sketch-container">
+        <iframe
+          src={`${import.meta.env.BASE_URL}sketches/index.html`}
+          title="Generative Masks Live Demo"
+          class="sketch-iframe"
+        />
+        <p class="sketch-instruction">
+          Click on the canvas to generate a new mask!
+        </p>
+      </div>
+    ) : (
+      <div class="gallery">
+        <Image
+          src={projectImage}
+          alt={project.data.title}
+          class="gallery-image"
+        />
+      </div>
+    )
+  }
 </BaseLayout>
 
 <script>
